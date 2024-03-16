@@ -232,6 +232,8 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-vitals" role="tabpanel">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        class="btn btn-primary mb-2 float-end">New Entry</a>
                         <div class="row">
                             <div class="col-md-6">
                                 {!! $chart->container() !!}
@@ -241,6 +243,8 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-allergies" role="tabpanel">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                            class="btn btn-primary mb-2 float-end">New Entry</a>
                         <table class="table">
                             <thead class="thead-light">
                                 <tr>
@@ -259,10 +263,12 @@
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-diagnosis" role="tabpanel">
                         <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
-                            class="btn btn-primary float-end">New Entry</a>
+                            class="btn btn-primary mb-2 float-end">New Entry</a>
                         <livewire:diagnoses />
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-lab" role="tabpanel">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        class="btn btn-primary mb-2 float-end">New Entry</a>
                         <table class="table">
 
                             <thead class="thead-light">
@@ -306,6 +312,8 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-drugs" role="tabpanel">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        class="btn btn-primary mb-2 float-end">New Entry</a>
                         <table class="table">
                             <thead class="thead-light">
                                 <tr>
@@ -323,6 +331,8 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-imaging" role="tabpanel">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        class="btn btn-primary mb-2 float-end">New Entry</a>
                         <table class="table">
                             <thead class="thead-light">
                                 <tr>
@@ -340,6 +350,8 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-procedures" role="tabpanel">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        class="btn btn-primary mb-2 float-end">New Entry</a>
                         <table class="table">
                             <!-- thead -->
                             <thead class="thead-light">
@@ -365,6 +377,8 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-opd" role="tabpanel">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        class="btn btn-primary mb-2 float-end">New Entry</a>
                         <table class="table">
 
                             <thead class="thead-light">
@@ -385,6 +399,8 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-documents" role="tabpanel">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        class="btn btn-primary mb-2 float-end">New Entry</a>
                         <table class="table">
 
                             <thead class="thead-light">
