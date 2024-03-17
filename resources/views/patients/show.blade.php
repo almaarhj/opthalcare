@@ -232,7 +232,7 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-vitals" role="tabpanel">
-                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-vitals-modal"
                         class="btn btn-primary mb-2 float-end">New Entry</a>
                         <div class="row">
                             <div class="col-md-6">
@@ -240,26 +240,15 @@
                             </div>
                             <script src="{{ $chart->cdn() }}"></script>
                             {{ $chart->script() }}
+
                         </div>
+                        @include('_partials._modals.modal-new-vitals')
+                        
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-allergies" role="tabpanel">
-                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-allergies-modal"
                             class="btn btn-primary mb-2 float-end">New Entry</a>
-                        <table class="table">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Allergen</th>
-                                    <th>Reaction</th>
-                                    <th>User</th>
-                                    <th>---</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-
-                        </table>
+                        <livewire:allergies />
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-diagnosis" role="tabpanel">
                         <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
@@ -267,7 +256,7 @@
                         <livewire:diagnoses />
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-lab" role="tabpanel">
-                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-lab-modal"
                         class="btn btn-primary mb-2 float-end">New Entry</a>
                         <table class="table">
 
@@ -310,9 +299,11 @@
                             </tbody>
 
                         </table>
+                        @include('_partials._modals.modal-new-lab')
+                        
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-drugs" role="tabpanel">
-                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-drugs-modal"
                         class="btn btn-primary mb-2 float-end">New Entry</a>
                         <table class="table">
                             <thead class="thead-light">
@@ -329,9 +320,10 @@
                             </tbody>
 
                         </table>
+                        @include('_partials._modals.modal-new-drugs')
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-imaging" role="tabpanel">
-                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-imaging-modal"
                         class="btn btn-primary mb-2 float-end">New Entry</a>
                         <table class="table">
                             <thead class="thead-light">
@@ -348,9 +340,10 @@
                             </tbody>
 
                         </table>
+                        @include('_partials._modals.modal-new-imaging')
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-procedures" role="tabpanel">
-                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-procedures-modal"
                         class="btn btn-primary mb-2 float-end">New Entry</a>
                         <table class="table">
                             <!-- thead -->
@@ -375,9 +368,10 @@
                             </tbody><!-- /tbody -->
 
                         </table>
+                        @include('_partials._modals.modal-new-procedures')
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-opd" role="tabpanel">
-                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-opd-modal"
                         class="btn btn-primary mb-2 float-end">New Entry</a>
                         <table class="table">
 
@@ -397,9 +391,10 @@
                             </tbody>
 
                         </table>
+                        @include('_partials._modals.modal-new-opd')
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-documents" role="tabpanel">
-                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-documents-modal"
                         class="btn btn-primary mb-2 float-end">New Entry</a>
                         <table class="table">
 
@@ -417,6 +412,7 @@
                             </tbody>
 
                         </table>
+                        @include('_partials._modals.modal-new-documents')
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-bills" role="tabpanel">
                         <table class="table">
