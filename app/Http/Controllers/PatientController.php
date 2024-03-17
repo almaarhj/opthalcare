@@ -35,8 +35,8 @@ class PatientController extends Controller
     $states = $ng->states;
     $religions = Religion::all();
     $hmos = HmoGroup::all();
-   // $hospital_no = UniqueIdGenerator::generate(['table' => 'patients', 'length' => 4,]);
-    return view('patients.create', compact('religions', 'states', 'hmos'));
+    $hospital_no = UniqueIdGenerator::generate(['table' => 'patients', 'length' => 4,]);
+    return view('patients.create', compact('religions', 'states', 'hmos', 'ho'));
   }
 
   /**
@@ -49,17 +49,17 @@ class PatientController extends Controller
   {
     $user = User::create(array_merge($request->except(['date_of_birth', 'gender', 'password']), ['password' => bcrypt($request->password)]));
     $user->assignRole('patient');
-   // $hospital_no = UniqueIdGenerator::generate(['table' => 'patients', 'length' => 4,]);
-    $patient = Patient::create(array_merge($request->except(['password', 'next_of_kin_name','dependent', 'next_of_kin_relation', 'next_of_kin_phone', 'next_of_kin_address']), ['user_id' => $user->id]));
+    $hospital_no = UniqueIdGenerator::generate(['table' => 'patients', 'length' => 4,]);
+    $patient = Patient::create(array_merge($request->except(['password', 'next_of_kin_name', 'dependent', 'next_of_kin_relation', 'next_of_kin_phone', 'next_of_kin_address']), ['user_id' => $user->id]));
     $next_of_kin = NextOfKin::create(array_merge($request->only(['next_of_kin_name', 'next_of_kin_relation', 'next_of_kin_phone', 'next_of_kin_address']), ['user_id' => $user->id]));
-    return redirect()->route('app.patients.index')>with(['success' => 'Patient Created Successfully', 'check-in' => $patient->id]);
+    return redirect()->route('app.patients.index') > with(['success' => 'Patient Created Successfully', 'check-in' => $patient->id]);
   }
 
 
   public function createAccount(Request $request)
   {
     $user = User::create(array_merge($request->except(['date_of_birth', 'gender', 'password']), ['password' => bcrypt($request->password)]));
-    // $user->assignRole('patient');
+    $user->assignRole('patient');
     $hospital_no = UniqueIdGenerator::generate(['table' => 'patients', 'length' => 4,]);
     $patient = Patient::create(array_merge($request->except(['password']), ['hospital_no' => $hospital_no, 'user_id' => $user->id]));
 
@@ -75,12 +75,11 @@ class PatientController extends Controller
   public function show(BloodPressureChart $chart, Patient $patient)
   {
     $checked_in = 1;
-    if ($checked_in){
+    if ($checked_in) {
       return view('patients.show', ['patient' => $patient, 'chart' => $chart->build()]);
-    }else{
+    } else {
       return back()->with('error', 'Please Check-In the Patient');
     }
-
   }
 
   /**
@@ -91,7 +90,12 @@ class PatientController extends Controller
    */
   public function edit(Patient $patient)
   {
-    //
+    $ng = new NG();
+    $states = $ng->states;
+    $religions = Religion::all();
+    $hmos = HmoGroup::all();
+    $hospital_no = UniqueIdGenerator::generate(['table' => 'patients', 'length' => 4,]);
+    return view('patients.edit', compact('religions', 'states', 'hmos', 'patient'));
   }
 
   public function draw(Patient $patient)
@@ -106,9 +110,55 @@ class PatientController extends Controller
    * @param  \App\Models\Patient  $patient
    * @return \Illuminate\Http\Response
    */
+  // public function update(Request $request, Patient $patient)
+  // {
+  //   $user = User::findOrFail($patient->user->id);
+  //   $user->update(array_merge($request->except(['date_of_birth', 'gender', 'password']), ['password' => bcrypt($request->password)]));
+
+  //   $user->assignRole('patient');
+
+  //   $patient = Patient::where('user_id', $patient->user->id)->firstOrFail();
+  //   $patient->update($request->except(['password', 'next_of_kin_name', 'dependent', 'next_of_kin_relation', 'next_of_kin_phone', 'next_of_kin_address']));
+
+  //   $nextOfKin = NextOfKin::where('user_id', $$patient->user->id)->firstOrFail();
+  //   $nextOfKin->update($request->only(['next_of_kin_name', 'next_of_kin_relation', 'next_of_kin_phone', 'next_of_kin_address']));
+  // }
+
   public function update(Request $request, Patient $patient)
   {
-    //
+    $userId = $patient->user->id;
+
+    $userUpdateData = array_merge(
+      $request->except(['date_of_birth', 'gender', 'password']),
+      ['password' => bcrypt($request->password)]
+    );
+
+    $user = User::findOrFail($userId);
+    $user->update($userUpdateData);
+    $user->assignRole('patient');
+
+    $patientUpdateData = $request->except([
+      'password',
+      'next_of_kin_name',
+      'dependent',
+      'next_of_kin_relation',
+      'next_of_kin_phone',
+      'next_of_kin_address'
+    ]);
+
+    $patient = Patient::where('user_id', $userId)->firstOrFail();
+    $patient->update($patientUpdateData);
+
+    $nextOfKinUpdateData = $request->only([
+      'next_of_kin_name',
+      'next_of_kin_relation',
+      'next_of_kin_phone',
+      'next_of_kin_address'
+    ]);
+
+    $nextOfKin = NextOfKin::where('user_id', $userId)->firstOrFail();
+    $nextOfKin->update($nextOfKinUpdateData);
+    return redirect()->route('app.patients.index')->with('success', 'Patient Updated Successfully');
   }
 
   /**

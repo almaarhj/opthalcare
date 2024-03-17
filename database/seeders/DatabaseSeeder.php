@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Religion;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,5 +19,11 @@ class DatabaseSeeder extends Seeder
 
     $this->call(UsersSeeder::class);
     $this->call(RolesAndPermissionsSeeder::class);
+
+    $religions = ['Islam', 'Christianity', 'Others'];
+
+    foreach ($religions as $religion) {
+      Religion::create(['name' => $religion]);
+    }
   }
 }

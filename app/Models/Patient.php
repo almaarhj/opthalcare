@@ -8,36 +8,53 @@ use Illuminate\Database\Eloquent\Model;
 
 class Patient extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'hospital_no',
-        'middlename',
-        'phone',
-        'date_of_birth',
-        'gender',
-        'religion_id',
-        'occupation',
-        'marital_status',
-        'state_of_residence',
-        'lga_of_residence',
-        'state_of_origin',
-        'lga_of_origin',
-        'residential_address',
-        'hmo_id',
-        'dependent',
-        'principal_id',
-    ];
+  protected $fillable = [
+    'user_id',
+    'hospital_no',
+    'middlename',
+    'phone',
+    'date_of_birth',
+    'gender',
+    'religion_id',
+    'occupation',
+    'marital_status',
+    'state_of_residence',
+    'lga_of_residence',
+    'state_of_origin',
+    'lga_of_origin',
+    'residential_address',
+    'hmo_id',
+    'dependent',
+    'principal_id',
+  ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+  public function user()
+  {
+    return $this->belongsTo(User::class);
+  }
 
 
-    public function getAge()
-    {
-        return Carbon::parse($this->date_of_birth)->age." yrs";
-    }
+  public function getAge()
+  {
+    return Carbon::parse($this->date_of_birth)->age . " yrs";
+  }
+
+  public function religion()
+  {
+    return $this->belongsTo(Religion::class);
+  }
+
+  // public function hmo()
+  // {
+  //   return $this->belongsTo(Hmo::class);
+  // }
+
+  public function state()
+  {
+    return $this->belongsTo(State::class);
+  }
+
+  
 }
