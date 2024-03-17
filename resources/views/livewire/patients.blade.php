@@ -17,9 +17,12 @@
                                     style="">
                                     <a class="dropdown-item" href="{{ route('app.patients.show', $patient->id) }}">Open
                                         Profile</a>
-                                    <a class="dropdown-item" href="{{route('app.patients.edit', $patient->id)}}">Edit Profile</a>
-                                  <a class="dropdown-item" href="javascript:void(0);">Check In</a>
-                                  <a class="dropdown-item" href="javascript:void(0);">Schedule Appointment</a>
+                                    <a class="dropdown-item" href="{{ route('app.patients.edit', $patient->id) }}">Edit
+                                        Profile</a>
+                                    <a class="dropdown-item" href="javascript:void(0);">Check In</a>
+                                    <a class="dropdown-item" data-bs-toggle="modal"
+                                        data-bs-target="#schedule-appointment{{ $patient->id }}">Schedule
+                                        Appointment</a>
                                     <a class="dropdown-item text-bg-danger" href="javascript:void(0);">Delete
                                         Profile</a>
                                 </div>
@@ -37,6 +40,7 @@
                     </figure><!-- /.card-figure -->
                 </div><!-- /.card -->
             </div>
+            @include('_partials._modals.modal-schedule-appointment')
         @endforeach
     </div>
 </div>

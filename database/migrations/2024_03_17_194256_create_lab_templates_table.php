@@ -11,12 +11,10 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('laboratories', function (Blueprint $table) {
+    Schema::create('lab_templates', function (Blueprint $table) {
       $table->id();
       $table->string('name');
-      $table->integer('category_id')->nullable();
-      $table->integer('template_id')->nullable();
-      $table->integer('price')->default(0);
+      $table->longText('body');
       $table->timestamps();
     });
   }
@@ -26,6 +24,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('laboratories');
+    Schema::dropIfExists('lab_templates');
   }
 };
