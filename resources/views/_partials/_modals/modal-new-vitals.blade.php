@@ -64,36 +64,43 @@
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <button type="button" class="btn btn-primary mt-2" id="addMoreBtn">Add More Reading</button>
-                                    
+                                    <button type="button" class="btn btn-primary mt-2" id="addMoreBtn">Add More
+                                        Reading</button>
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                
-                
-                <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-                <script>
-                    $(document).ready(function() {
-                       
-                        $('#addMoreBtn').click(function() {
-                            var newRow = $('<tr></tr>');
-                            newRow.append('<th><select class="form-select" aria-label="Parameter"><option value="">---------</option><option value="20">Temperature</option><option value="16">Pulse</option><option value="22">Weight</option><option value="3">Blood Pressure</option><option value="6">Fundus Height</option><option value="7">Glucose</option><option value="8">Head Circumference</option><option value="9">Height</option><option value="10">Length of Arm</option><option value="11">MUAC</option><option value="12">Mid-Arm Circumference</option><option value="13">PCV</option><option value="14">Pain Scale</option><option value="15">Protein</option><option value="17">Respiration</option><option value="18">SpO2</option><option value="19">Surface Area</option><option value="21">Urine</option><option value="1">BMI</option><option value="23">EWS</option><option value="2">BSA</option><option value="4">Dilation</option><option value="5">Fetal Heart Rate</option></select></th>');
-                            newRow.append('<td><input type="text" class="form-control"></td>');
-                            newRow.append('<td><button type="button" class="btn btn-danger btn-sm delete-row"><span aria-hidden="true">&times;</span></button></td>');
-                            $('#vitalSignsTable tbody').append(newRow);
+
+
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+                        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+                    <script>
+                        $(document).ready(function() {
+
+                            $('#addMoreBtn').click(function() {
+                                var newRow = $('<tr></tr>');
+                                newRow.append(
+                                    '<th><select class="form-select" aria-label="Parameter"><option value="">---------</option><option value="20">Temperature</option><option value="16">Pulse</option><option value="22">Weight</option><option value="3">Blood Pressure</option><option value="6">Fundus Height</option><option value="7">Glucose</option><option value="8">Head Circumference</option><option value="9">Height</option><option value="10">Length of Arm</option><option value="11">MUAC</option><option value="12">Mid-Arm Circumference</option><option value="13">PCV</option><option value="14">Pain Scale</option><option value="15">Protein</option><option value="17">Respiration</option><option value="18">SpO2</option><option value="19">Surface Area</option><option value="21">Urine</option><option value="1">BMI</option><option value="23">EWS</option><option value="2">BSA</option><option value="4">Dilation</option><option value="5">Fetal Heart Rate</option></select></th>'
+                                );
+                                newRow.append('<td><input type="text" class="form-control"></td>');
+                                newRow.append(
+                                    '<td><button type="button" class="btn btn-danger btn-sm delete-row"><span aria-hidden="true">&times;</span></button></td>'
+                                );
+                                $('#vitalSignsTable tbody').append(newRow);
+                            });
+
+
+                            $(document).on('click', '.delete-row', function() {
+                                $(this).closest('tr').remove();
+                            });
                         });
-                
-                        
-                        $(document).on('click', '.delete-row', function() {
-                             $(this).closest('tr').remove();
-                        });
-                    });
-                </script>
-                    
-                         
+                    </script>
+
+
                     <div class="col-12 text-center">
-                        <button type="button" class="btn btn-secondary text-black">Close</button>
+                        <button type="button" data-bs-dismiss="modal" aria-label="Close"
+                            class="btn btn-secondary text-black">Close</button>
                         <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
                     </div>
                 </form>

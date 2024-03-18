@@ -94,29 +94,7 @@
     </div>
     <!--/ Header -->
     <div class="row g-4">
-        <div class="col-lg-4 col-6 mb-4">
-            <div class="card h-100">
-                <div class="card-body text-center">
-                    <div class="badge rounded-pill p-2 bg-label-primary mb-2">
-                        <i class="ti ti-briefcase ti-sm"></i>
-                    </div>
-                    <h5 class="card-title mb-2">0.00</h5>
-                    <small>Outstanding Balance</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-6 mb-4">
-            <div class="card h-100">
-                <div class="card-body text-center">
-                    <div class="badge rounded-pill p-2 bg-label-danger mb-2">
-                        <i class="ti ti-briefcase ti-sm"></i>
-                    </div>
-                    <h5 class="card-title mb-2">0.00</h5>
-                    <small>Credit Balance</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-6 mb-4">
+        <div class="col-lg-6 col-6 mb-4">
             <div class="card h-100">
                 <div class="card-body text-center">
                     <div class="badge rounded-pill p-2 bg-label-success mb-2">
@@ -124,6 +102,17 @@
                     </div>
                     <h5 class="card-title mb-2">0.00</h5>
                     <small>Wallet Balance</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <div class="badge rounded-pill p-2 bg-label-danger mb-2">
+                        <i class="ti ti-briefcase ti-sm"></i>
+                    </div>
+                    <h5 class="card-title mb-2">0.00</h5>
+                    <small>Outstanding Balance</small>
                 </div>
             </div>
         </div>
@@ -239,7 +228,7 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-vitals" role="tabpanel">
-                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-vitals-modal"
                             class="btn btn-primary mb-2 float-end">New Entry</a>
                         <div class="row">
                             <div class="col-md-6">
@@ -250,16 +239,17 @@
 
                         </div>
                         @include('_partials._modals.modal-new-vitals')
-                        
+
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-va" role="tabpanel">
-                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-va-modal"
                             class="btn btn-primary mb-2 float-end">New Entry</a>
                         <div class="row">
                             <div class="col-md12">
 
                             </div>
                         </div>
+                        @include('_partials._modals.modal-new-va')
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-allergies" role="tabpanel">
                         <a href="" data-bs-toggle="modal" data-bs-target="#new-allergies-modal"
@@ -272,7 +262,7 @@
                         <livewire:diagnoses />
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-lab" role="tabpanel">
-                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-lab-modal"
                             class="btn btn-primary mb-2 float-end">New Entry</a>
                         <table class="table">
 
@@ -316,7 +306,7 @@
 
                         </table>
                         @include('_partials._modals.modal-new-lab')
-                        
+
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-drugs" role="tabpanel">
                         <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
