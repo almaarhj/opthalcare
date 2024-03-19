@@ -166,7 +166,7 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
-                            data-bs-target="#navs-pills-justified-radiology" aria-controls="navs-pills-justified-radiology"
+                            data-bs-target="#navs-pills-justified-imaging" aria-controls="navs-pills-justified-radiology"
                             aria-selected="false" tabindex="-1">
                             <i class="tf-icons ti ti-photo ti-xs me-1"></i> Radiology Requests
                         </button>
@@ -337,7 +337,7 @@
                         @include('_partials._modals.modal-new-drugs')
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-imaging" role="tabpanel">
-                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-imaging-modal"
                             class="btn btn-primary mb-2 float-end">New Entry</a>
                         <table class="table">
                             <thead class="thead-light">

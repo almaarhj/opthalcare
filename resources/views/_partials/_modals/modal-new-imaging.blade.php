@@ -11,10 +11,11 @@
                 </div>
                 <form wire:submit.prevent="updateAntenatal" class="row g-3">
 
-                    
-                      <div class="col-12 text-center">
+
+                    <div class="col-12 text-center">
                         <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
-                        <a href="{{route('app.patient.draw', request()->route()->patient->id)}}" class="btn btn-label-secondary" target="_blank">Draw</a>
+                        <a href="{{ route('app.patient.draw', request()->route()->patient->id) }}"
+                            class="btn btn-label-secondary" target="_blank">Draw</a>
                     </div>
                 </form>
             </div>
