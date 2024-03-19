@@ -46,7 +46,7 @@
                     </div>
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <a class="btn btn-label-dark waves-effect" href="javascript:void(0);" data-bs-toggle="modal"
-                            data-bs-target="#new-speciality-modal">New</a>
+                            data-bs-target="#new-radiology-test-modal">New</a>
                         <a class="btn btn-label-dark waves-effect" href="javascript:void(0);" data-bs-toggle="modal"
                             data-bs-target="#new-speciality-modal">Downlaod List</a>
                         <a class="btn btn-label-dark waves-effect" href="javascript:void(0);" data-bs-toggle="modal"
@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <livewire:laboratories />
+                    <livewire:radiologies />
                 </div>
             </div>
         </div>
@@ -67,11 +67,11 @@
                         <h5 class="mb-0">Radiology Category</h5>
                         {{-- <small class="text-muted">Average 72% Completed</small> --}}
                     </div>
-                    <a class="btn btn-label-dark waves-effect" href="javascript:void(0);" data-bs-toggle="modal"
-                        data-bs-target="#new-consulting-template-modal">New</a>
+                      <a class="btn btn-label-dark waves-effect" href="javascript:void(0);" data-bs-toggle="modal"
+                        data-bs-target="#new-radiology-category-modal">New</a>
                 </div>
                 <div class="card-body">
-                    <livewire:lab-category />
+                    <livewire:radiology-category />
                 </div>
             </div>
         </div>
@@ -83,10 +83,10 @@
                         {{-- <small class="text-muted">Average 72% Completed</small> --}}
                     </div>
                     <a class="btn btn-label-dark waves-effect" href="javascript:void(0);" data-bs-toggle="modal"
-                        data-bs-target="#new-consulting-template-modal">New</a>
+                        data-bs-target="#new-radiology-template-modal">New</a>
                 </div>
                 <div class="card-body">
-                    <livewire:lab-template />
+                    <livewire:radiology-template />
                 </div>
             </div>
         </div>

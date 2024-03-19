@@ -166,6 +166,13 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
+                            data-bs-target="#navs-pills-justified-radiology" aria-controls="navs-pills-justified-radiology"
+                            aria-selected="false" tabindex="-1">
+                            <i class="tf-icons ti ti-photo ti-xs me-1"></i> Radiology Requests
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
                             data-bs-target="#navs-pills-justified-drugs" aria-controls="navs-pills-justified-drugs"
                             aria-selected="false" tabindex="-1">
                             <i class="tf-icons ti ti-prescription ti-xs me-1"></i> Drug Prescriptions

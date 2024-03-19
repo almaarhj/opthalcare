@@ -8,4 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Drug extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'name',
+        'price',
+        'quantity',
+        'category_id',
+        'threshold',
+        'is_active'
+      ];
+
+  public function category()
+  {
+    return $this->belongsTo(DrugCategory::class, 'category_id',);
+  }
+    
 }
+

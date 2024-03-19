@@ -3,29 +3,31 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\DrugCategory as ModelCategory;
 
-class DrugCategory extends Base
+use App\Models\RadiologyCategory as ModelCategory;
+
+class RadiologyCategory extends Base
 {
   public $sortBy = 'name';
   public $CategoryId;
   public $CategoryName;
 
 
-  public function selectCategory(ModelCategory $drugCategory)
+  public function selectCategory(ModelCategory $radiologyCategory)
   {
-    $this->CategoryId = $drugCategory->id;
-    $this->CategoryName = $drugCategory->name;
+    $this->CategoryId = $radiologyCategory->id;
+    $this->CategoryName = $radiologyCategory->name;
 
-    $this->dispatchBrowserEvent('DrugCategoryEditModal');
+    $this->dispatchBrowserEvent('RadiologyCategoryEditModal');
   }
 
   public function updateCategory()
   {
     ModelCategory::where('id', $this->CategoryId)->update(['name' => $this->CategoryName]);
 
-    return redirect()->route('app.settings.pharmacy')->with('success', 'Category Updated');
+    return redirect()->route('app.settings.radiology')->with('success', 'Category Updated');
   }
+
   public function render()
   {
     if ($this->search) {
@@ -34,7 +36,7 @@ class DrugCategory extends Base
         ->paginate(10);
 
       return view(
-        'livewire.drug-category',
+        'livewire.radiology-category',
         ['categories' => $categories]
       );
     } else {
@@ -42,7 +44,7 @@ class DrugCategory extends Base
         ->orderBy($this->sortBy, $this->sortDirection)
         ->paginate($this->perPage);
       return view(
-        'livewire.drug-category',
+        'livewire.radiology-category',
         ['categories' => $categories]
       );
     }

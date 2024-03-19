@@ -92,4 +92,4 @@
         });
     </script> --}}
 </div>
-@include('_partials._modals.modal-new-drugs-category')
+@include('_partials._modals.modal-new-radiology-category')
