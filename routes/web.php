@@ -79,10 +79,16 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], functi
   Route::post('lab-test', [LaboratoryController::class, 'store'])->name('lab-test.store');
   Route::post('lab-test/{test}', [LaboratoryController::class, 'update'])->name('lab-test.update');
   Route::resource('lab', LabRequestController::class);
+
+  // **** Radiology Routes
   Route::resource('radiology', RadiologyController::class);
   Route::post('radiology-category', [RadiologyController::class, 'storeCategory'])->name('radiology-category.store');
   Route::post('radiology-category/{category}', [RadiologyController::class, 'updateCategory'])->name('radiology-category.update');
   Route::post('radiology-template', [RadiologyController::class, 'storeTemplate'])->name('radiology-template.store');
+  Route::post('radiology-test', [RadiologyController::class, 'store'])->name('radiology-test.store');
+  Route::post('radiology-test/{test}', [RadiologyController::class, 'update'])->name('radiology-test.update');
+//
+
   Route::resource('wait-list', WaitingListController::class);
   Route::resource('consumables', ConsumbleController::class);
   Route::resource('admissions', AdmissionController::class);
