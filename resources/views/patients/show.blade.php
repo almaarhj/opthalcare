@@ -71,9 +71,10 @@
                                 </ul>
                             </div>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-primary dropdown-toggle waves-effect waves-light"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Action
+                                <button type="button" class="btn btn-sm btn-icon btn-light waves-effect waves-light"
+                                    data-bs-toggle="dropdown" data-boundary="viewport" aria-expanded="false"
+                                    aria-haspopup="true">
+                                    <i class="fa fa-ellipsis-v"></i>
                                 </button>
                                 <ul class="dropdown-menu" style="">
                                     <li><a class="dropdown-item" href="javascript:void(0);">Edit Patient</a></li>
@@ -94,29 +95,7 @@
     </div>
     <!--/ Header -->
     <div class="row g-4">
-        <div class="col-lg-4 col-6 mb-4">
-            <div class="card h-100">
-                <div class="card-body text-center">
-                    <div class="badge rounded-pill p-2 bg-label-primary mb-2">
-                        <i class="ti ti-briefcase ti-sm"></i>
-                    </div>
-                    <h5 class="card-title mb-2">0.00</h5>
-                    <small>Outstanding Balance</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-6 mb-4">
-            <div class="card h-100">
-                <div class="card-body text-center">
-                    <div class="badge rounded-pill p-2 bg-label-danger mb-2">
-                        <i class="ti ti-briefcase ti-sm"></i>
-                    </div>
-                    <h5 class="card-title mb-2">0.00</h5>
-                    <small>Credit Balance</small>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-6 mb-4">
+        <div class="col-lg-6 col-6 mb-4">
             <div class="card h-100">
                 <div class="card-body text-center">
                     <div class="badge rounded-pill p-2 bg-label-success mb-2">
@@ -124,6 +103,17 @@
                     </div>
                     <h5 class="card-title mb-2">0.00</h5>
                     <small>Wallet Balance</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <div class="badge rounded-pill p-2 bg-label-danger mb-2">
+                        <i class="ti ti-briefcase ti-sm"></i>
+                    </div>
+                    <h5 class="card-title mb-2">0.00</h5>
+                    <small>Outstanding Balance</small>
                 </div>
             </div>
         </div>
@@ -246,7 +236,7 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-vitals" role="tabpanel">
-                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-vitals-modal"
                             class="btn btn-primary mb-2 float-end">New Entry</a>
                         <div class="row">
                             <div class="col-md-6">
@@ -260,13 +250,14 @@
 
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-va" role="tabpanel">
-                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-va-modal"
                             class="btn btn-primary mb-2 float-end">New Entry</a>
                         <div class="row">
                             <div class="col-md12">
 
                             </div>
                         </div>
+                        @include('_partials._modals.modal-new-va')
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-allergies" role="tabpanel">
                         <a href="" data-bs-toggle="modal" data-bs-target="#new-allergies-modal"
@@ -279,7 +270,7 @@
                         <livewire:diagnoses />
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-lab" role="tabpanel">
-                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-lab-modal"
                             class="btn btn-primary mb-2 float-end">New Entry</a>
                         <table class="table">
 
@@ -323,54 +314,6 @@
 
                         </table>
                         @include('_partials._modals.modal-new-lab')
-
-                    </div>
-                    <div class="tab-pane fade" id="navs-pills-justified-radiology" role="tabpanel">
-                        <a href="" data-bs-toggle="modal" data-bs-target="#new-radiology-modal"
-                            class="btn btn-primary mb-2 float-end">New Entry</a>
-                        <table class="table">
-
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>
-                                        <div class="thead-dd dropdown">
-                                            <div class="custom-control custom-control-inline custom-control-nolabel custom-checkbox"
-                                                style="top:unset!important;margin-top: 0.2em!important;">
-                                                <input title="" type="checkbox" id="lab-select-all"
-                                                    class="custom-control-input">
-                                                <label class="custom-control-label" for="lab-select-all"></label>
-                                            </div>
-                                            <div class="thead-btn" role="button" data-toggle="dropdown"
-                                                data-boundary="document" aria-haspopup="true" aria-expanded="false">
-                                                <span class="fa fa-caret-down"></span>
-                                            </div>
-                                            <div class="dropdown-menu">
-                                                <div class="dropdown-arrow"></div>
-                                                <a class="dropdown-item" href="javascript:" id="item-select-all">Select
-                                                    all</a>
-                                                <a class="dropdown-item" href="javascript:"
-                                                    id="item-unselect-all">Unselect all</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="javascript:"
-                                                    id="grouped-lab-result-print-btn">Grouped Print Result</a>
-                                            </div>
-                                        </div>
-
-                                    </th>
-                                    <th>Date of Request</th>
-                                    <th>Service</th>
-                                    <th>User</th>
-                                    <th>Status</th>
-                                    <th>---</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-
-                        </table>
-
-                        @include('_partials._modals.modal-new-radiology')
 
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-drugs" role="tabpanel">
