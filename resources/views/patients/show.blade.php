@@ -71,9 +71,10 @@
                                 </ul>
                             </div>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-primary dropdown-toggle waves-effect waves-light"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Action
+                                <button type="button" class="btn btn-sm btn-icon btn-light waves-effect waves-light"
+                                    data-bs-toggle="dropdown" data-boundary="viewport" aria-expanded="false"
+                                    aria-haspopup="true">
+                                    <i class="fa fa-ellipsis-v"></i>
                                 </button>
                                 <ul class="dropdown-menu" style="">
                                     <li><a class="dropdown-item" href="javascript:void(0);">Edit Patient</a></li>
