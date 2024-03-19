@@ -176,6 +176,13 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
+                            data-bs-target="#navs-pills-justified-radiology" aria-controls="navs-pills-justified-radiology"
+                            aria-selected="false" tabindex="-1">
+                            <i class="tf-icons ti ti-photo ti-xs me-1"></i> Radiology Requests
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
                             data-bs-target="#navs-pills-justified-drugs" aria-controls="navs-pills-justified-drugs"
                             aria-selected="false" tabindex="-1">
                             <i class="tf-icons ti ti-prescription ti-xs me-1"></i> Drug Prescriptions
@@ -250,7 +257,7 @@
 
                         </div>
                         @include('_partials._modals.modal-new-vitals')
-                        
+
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-va" role="tabpanel">
                         <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
@@ -316,7 +323,55 @@
 
                         </table>
                         @include('_partials._modals.modal-new-lab')
-                        
+
+                    </div>
+                    <div class="tab-pane fade" id="navs-pills-justified-radiology" role="tabpanel">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-radiology-modal"
+                            class="btn btn-primary mb-2 float-end">New Entry</a>
+                        <table class="table">
+
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>
+                                        <div class="thead-dd dropdown">
+                                            <div class="custom-control custom-control-inline custom-control-nolabel custom-checkbox"
+                                                style="top:unset!important;margin-top: 0.2em!important;">
+                                                <input title="" type="checkbox" id="lab-select-all"
+                                                    class="custom-control-input">
+                                                <label class="custom-control-label" for="lab-select-all"></label>
+                                            </div>
+                                            <div class="thead-btn" role="button" data-toggle="dropdown"
+                                                data-boundary="document" aria-haspopup="true" aria-expanded="false">
+                                                <span class="fa fa-caret-down"></span>
+                                            </div>
+                                            <div class="dropdown-menu">
+                                                <div class="dropdown-arrow"></div>
+                                                <a class="dropdown-item" href="javascript:" id="item-select-all">Select
+                                                    all</a>
+                                                <a class="dropdown-item" href="javascript:"
+                                                    id="item-unselect-all">Unselect all</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="javascript:"
+                                                    id="grouped-lab-result-print-btn">Grouped Print Result</a>
+                                            </div>
+                                        </div>
+
+                                    </th>
+                                    <th>Date of Request</th>
+                                    <th>Service</th>
+                                    <th>User</th>
+                                    <th>Status</th>
+                                    <th>---</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+
+                        </table>
+
+                        @include('_partials._modals.modal-new-radiology')
+
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-drugs" role="tabpanel">
                         <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
