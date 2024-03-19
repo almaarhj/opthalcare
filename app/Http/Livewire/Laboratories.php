@@ -15,7 +15,7 @@ class Laboratories extends Base
   public $LabTestPrice;
 
 
-  public function selectLabTest($id)
+  public function selectDrugs($id)
   {
     $test = Laboratory::find($id);
 
@@ -28,7 +28,7 @@ class Laboratories extends Base
     $this->dispatchBrowserEvent('LabTestEditModal');
   }
 
-  public function updateLabTest()
+  public function updateDrugs()
   {
     Laboratory::where('id', $this->LabTestId)->update(['name' => $this->LabTestName, 'category_id' => $this->LabTestCategory, 'template_id' => $this->LabTestTemplate, 'price' => $this->LabTestPrice]);
 

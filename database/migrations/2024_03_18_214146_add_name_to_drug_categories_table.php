@@ -11,16 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('drugs', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('drug_categories', function (Blueprint $table) {
+            
+            $table->string('name')->nullable();
         });
     }
+
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('drugs');
+        Schema::table('drug_categories', function (Blueprint $table) {
+            $table->dropColumn('name');
+        });
     }
 };
+

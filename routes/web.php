@@ -26,6 +26,7 @@ use App\Http\Controllers\ProcedureController;
 use App\Http\Controllers\RadiologyController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\LaboratoryController;
+use App\Http\Controllers\PharmacyController;
 use App\Http\Controllers\LabRequestController;
 use App\Http\Controllers\SpecialityController;
 use App\Http\Controllers\AppointmentController;
@@ -54,6 +55,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
 Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], function () {
   Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
   Route::resource('users', UserController::class);
@@ -71,13 +73,17 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], functi
   Route::resource('beds', BedController::class);
   Route::resource('messages', MessageController::class);
   Route::resource('appointments', AppointmentController::class);
-  Route::resource('pharmacy', DrugController::class);
+  Route::resource('pharmacy', PharmacyController::class);
   Route::post('lab-category', [LaboratoryController::class, 'storeCategory'])->name('lab-category.store');
   Route::post('lab-category/{category}', [LaboratoryController::class, 'updateCategory'])->name('lab-category.update');
   Route::post('lab-template', [LaboratoryController::class, 'storeTemplate'])->name('lab-template.store');
   Route::post('lab-template/{template}', [LaboratoryController::class, 'updateTemplate'])->name('lab-template.update');
   Route::post('lab-test', [LaboratoryController::class, 'store'])->name('lab-test.store');
   Route::post('lab-test/{test}', [LaboratoryController::class, 'update'])->name('lab-test.update');
+  Route::post('drugs-add', [DrugController::class, 'storeDrugs'])->name('drugs-add.store');
+  Route::post('drugs-add/{drugs}', [DrugController::class, 'updateDrugs'])->name('drugs-add.update');
+  Route::post('drugs-category', [DrugController::class, 'storeCategory'])->name('drugs-category.store');
+  Route::post('drugs-category/{category}', [DrugController::class, 'updateCategory'])->name('drugs-category.update');
   Route::resource('lab', LabRequestController::class);
   Route::resource('radiology', RadiologyController::class);
   Route::post('radiology-category', [RadiologyController::class, 'storeCategory'])->name('radiology-category.store');

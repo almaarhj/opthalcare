@@ -2,12 +2,33 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Models\Drug;
+use App\Models\DrugCategory;
 use Illuminate\Http\Request;
 
 class DrugController extends Controller
 {
-  public function index()
+  
+  
+  public function storeDrugs(Request $request)
   {
-    return view('pharmacy.index');
+    $drug = Drug::create($request->all());
+    return redirect()->route('app.settings.pharmacy')->with('success', 'Drug Added !');
+  }
+
+  public function updateDrugs()
+  {
+  }
+
+  public function storeCategory(Request $request)
+  {
+    $category = DrugCategory::create($request->all());
+    // dd($request->all());
+    return redirect()->route('app.settings.pharmacy')->with('success', 'Drug Category Added !');
+  }
+
+  public function UpdateCategory()
+  {
   }
 }

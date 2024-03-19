@@ -45,14 +45,14 @@
                         <h5 class="mb-0">Drugs Category</h5>
                     </div>
                     <a class="btn btn-label-dark waves-effect" href="javascript:void(0);" data-bs-toggle="modal"
-                        data-bs-target="#new-speciality-modal">New</a>
+                        data-bs-target="#new-drugs-category-modal">New</a>
                 </div>
                 <div class="card-body">
-                    <livewire:drugs />
+                    <livewire:drug-category />
                 </div>
             </div>
         </div>
-        <!--/ Monthly Campaign State -->
+        <!--/  Monthly Campaign State -->
         <!-- Active Projects -->
         <div class="col-xl-12 col-md-12 mb-4">
             <div class="card h-100">
@@ -62,10 +62,10 @@
                         {{-- <small class="text-muted">Average 72% Completed</small> --}}
                     </div>
                     <a class="btn btn-label-dark waves-effect" href="javascript:void(0);" data-bs-toggle="modal"
-                        data-bs-target="#new-consulting-template-modal">New</a>
+                        data-bs-target="#new-add-drugs-modal">New</a>
                 </div>
                 <div class="card-body">
-                    <livewire:drug-category />
+                    <livewire:drugs />
                 </div>
             </div>
         </div>
