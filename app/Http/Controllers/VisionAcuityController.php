@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LabRequest;
+use App\Models\VisionAcuity;
 use Illuminate\Http\Request;
 
-class LabRequestController extends Controller
+class VisionAcuityController extends Controller
 {
   /**
    * Display a listing of the resource.
    */
   public function index()
   {
-    return view('laboratory.index');
+    //
   }
 
   /**
@@ -28,15 +28,14 @@ class LabRequestController extends Controller
    */
   public function store(Request $request)
   {
-    $labrequest = LabRequest::create(array_merge($request->except('status'), ['status' => 'Pending']));
-    // dd($request->all());
-    return redirect()->back()->with('success', 'Lab Test Requested!');
+    $va = VisionAcuity::create($request->all());
+    return redirect()->back()->with('success', 'Vision Acuity Recorded!');
   }
 
   /**
    * Display the specified resource.
    */
-  public function show(LabRequest $labRequest)
+  public function show(VisionAcuity $visionAcuity)
   {
     //
   }
@@ -44,7 +43,7 @@ class LabRequestController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(LabRequest $labRequest)
+  public function edit(VisionAcuity $visionAcuity)
   {
     //
   }
@@ -52,7 +51,7 @@ class LabRequestController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, LabRequest $labRequest)
+  public function update(Request $request, VisionAcuity $visionAcuity)
   {
     //
   }
@@ -60,7 +59,7 @@ class LabRequestController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(LabRequest $labRequest)
+  public function destroy(VisionAcuity $visionAcuity)
   {
     //
   }

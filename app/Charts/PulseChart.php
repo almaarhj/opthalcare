@@ -5,7 +5,7 @@ namespace App\Charts;
 use App\Models\Vitals;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 
-class BloodPressureChart
+class PulseChart
 {
   protected $chart;
 
@@ -16,7 +16,7 @@ class BloodPressureChart
 
   public function build($patient): \ArielMejiaDev\LarapexCharts\AreaChart
   {
-    $chartTarget = 'Blood Pressure';
+    $chartTarget = 'Pulse';
     $vitals = Vitals::where('parameter', $chartTarget)
       ->where('patient_id', $patient)
       ->select(['value', 'created_at'])
@@ -34,8 +34,8 @@ class BloodPressureChart
     // dd($chartLabels);
     // Build and return the chart
     return $this->chart->areaChart()
-      ->setTitle('Blood Pressure')
-      ->addData('Blood Pressure', $chartData)
+      ->setTitle($chartTarget)
+      ->addData($chartTarget, $chartData)
       ->setXAxis($chartLabels);
   }
 }

@@ -46,41 +46,41 @@
 
     <!-- DataTable with Buttons -->
     <div class="card">
-      <div class="card-header d-flex align-items-center justify-content-between">
+        <div class="card-header d-flex align-items-center justify-content-between">
 
-        <div class="card-title mb-0">
-          <input type="text" class="form-control" placeholder="Search Patients">
+            <div class="card-title mb-0">
+                <input type="text" class="form-control" placeholder="Search Patients">
+            </div>
+
+            <a href="{{ route('app.patients.create') }}" class="btn btn-label-primary waves-effect">
+                New Patient
+            </a>
+
+
         </div>
-
-          <a href="{{route('app.patients.create')}}" class="btn btn-label-primary waves-effect" >
-            New Patient
-          </a>
-
-
-      </div>
         <div class="card-datatable table-responsive pt-0">
             <livewire:patients />
         </div>
     </div>
     <!--/ DataTable with Buttons -->
     <script>
-    @if(session()->has('check-in'))
-        Swal.fire({
-          title: 'Are you sure?',
-          text: "You won't be able to revert this!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Yes, delete it!',
-          customClass: {
-            confirmButton: 'btn btn-primary me-3',
-            cancelButton: 'btn btn-label-secondary'
-          },
-          buttonsStyling: false
-        }).then((result) => {
-          if (result.isConfirmed) {
-            document.getElementById('delete#' + this.getAttribute('data-value')).submit();
-          }
-        })
-    @endif
+        @if (session()->has('check-in'))
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                customClass: {
+                    confirmButton: 'btn btn-primary me-3',
+                    cancelButton: 'btn btn-label-secondary'
+                },
+                buttonsStyling: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('delete#' + this.getAttribute('data-value')).submit();
+                }
+            })
+        @endif
     </script>
 @endsection

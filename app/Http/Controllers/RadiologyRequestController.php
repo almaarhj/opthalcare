@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LabRequest;
+use App\Models\RadiologyRequest;
 use Illuminate\Http\Request;
 
-class LabRequestController extends Controller
+class RadiologyRequestController extends Controller
 {
   /**
    * Display a listing of the resource.
    */
   public function index()
   {
-    return view('laboratory.index');
+    return view('radiology.index');
   }
 
   /**
@@ -28,15 +28,15 @@ class LabRequestController extends Controller
    */
   public function store(Request $request)
   {
-    $labrequest = LabRequest::create(array_merge($request->except('status'), ['status' => 'Pending']));
+    $imagingrequest = RadiologyRequest::create(array_merge($request->except('status'), ['status' => 'Pending']));
     // dd($request->all());
-    return redirect()->back()->with('success', 'Lab Test Requested!');
+    return redirect()->back()->with('success', 'Imaging Requested!');
   }
 
   /**
    * Display the specified resource.
    */
-  public function show(LabRequest $labRequest)
+  public function show(RadiologyRequest $radiologyRequest)
   {
     //
   }
@@ -44,7 +44,7 @@ class LabRequestController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(LabRequest $labRequest)
+  public function edit(RadiologyRequest $radiologyRequest)
   {
     //
   }
@@ -52,7 +52,7 @@ class LabRequestController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, LabRequest $labRequest)
+  public function update(Request $request, RadiologyRequest $radiologyRequest)
   {
     //
   }
@@ -60,7 +60,7 @@ class LabRequestController extends Controller
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(LabRequest $labRequest)
+  public function destroy(RadiologyRequest $radiologyRequest)
   {
     //
   }
