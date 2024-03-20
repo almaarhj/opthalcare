@@ -86,6 +86,13 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], functi
   Route::post('drugs-category/{category}', [DrugController::class, 'updateCategory'])->name('drugs-category.update');
   Route::resource('lab', LabRequestController::class);
 
+  Route::resource('procedures', ProcedureController::class);
+  Route::post('procedures', [ProcedureController::class, 'storeProcedure'])->name('procedures.store');
+  Route::post('procedures/{procedures}', [ProcedureController::class, 'updateProcedure'])->name('procedures.update');
+  Route::post('procedures-category', [ProcedureController::class, 'storeCategory'])->name('procedures-category.store');
+  Route::post('procedures-category/{category}', [ProcedureController::class, 'updateCategory'])->name('procedures-category.update');
+ 
+
   // **** Radiology Routes
   Route::resource('radiology', RadiologyController::class);
   Route::post('radiology-category', [RadiologyController::class, 'storeCategory'])->name('radiology-category.store');
@@ -98,7 +105,6 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], functi
   Route::resource('wait-list', WaitingListController::class);
   Route::resource('consumables', ConsumbleController::class);
   Route::resource('admissions', AdmissionController::class);
-  Route::resource('procedures', ProcedureController::class);
   Route::resource('billing', BillingController::class);
   Route::resource('antenatals', AntenatalController::class);
   Route::resource('specialities', SpecialityController::class);
@@ -116,7 +122,7 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], functi
   Route::get('settings/pharmacy', [SystemSettingsController::class, 'PharmacySettings'])->name('settings.pharmacy');
   Route::get('settings/laboratory', [SystemSettingsController::class, 'LaboratorySettings'])->name('settings.laboratory');
   Route::get('settings/radiology', [SystemSettingsController::class, 'RadiologySettings'])->name('settings.radiology');
-  Route::get('settings/procedures', [SystemSettingsController::class, 'RadiologySettings'])->name('settings.procedures');
+  Route::get('settings/procedures', [SystemSettingsController::class, 'ProcedureSettings'])->name('settings.procedures');
   Route::get('settings/dialysis', [SystemSettingsController::class, 'RadiologySettings'])->name('settings.dialysis');
   Route::resource('categories', ServiceCategoryController::class);
   Route::resource('positions', PositionController::class);

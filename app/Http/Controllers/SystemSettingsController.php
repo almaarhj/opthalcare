@@ -50,6 +50,11 @@ class SystemSettingsController extends Controller
     return view('settings.radiology.index');
   }
 
+  public function ProcedureSettings()
+  {
+    return view('settings.procedure.index');
+  }
+
   public function updateSystemSettings(Request $request, SystemSettings $system)
   {
     $this->validate($request, [
