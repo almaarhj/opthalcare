@@ -2,18 +2,17 @@
 
 namespace App\Models;
 
-use App\Http\Livewire\Laboratories;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LabRequest extends Model
+class RadiologyRequest extends Model
 {
   use HasFactory;
 
   protected $fillable = [
     'patient_id',
     'user_id',
-    'test_id',
+    'imaging_id',
     'request_note',
     'priority',
     'status'
@@ -21,7 +20,7 @@ class LabRequest extends Model
 
   public function test()
   {
-    return $this->belongsTo(Laboratory::class, 'test_id');
+    return $this->belongsTo(Radiology::class, 'imaging_id');
   }
 
   public function patient()

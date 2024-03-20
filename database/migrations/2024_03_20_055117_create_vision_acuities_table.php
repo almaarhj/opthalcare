@@ -11,14 +11,11 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('lab_requests', function (Blueprint $table) {
+    Schema::create('vision_acuities', function (Blueprint $table) {
       $table->id();
       $table->integer('patient_id');
-      $table->integer('test_id');
-      $table->integer('user_id');
-      $table->string('request_note')->nullable();
-      $table->string('priority');
-      $table->string('status');
+      $table->string('left_os');
+      $table->string('right_od');
       $table->timestamps();
     });
   }
@@ -28,6 +25,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('lab_requests');
+    Schema::dropIfExists('vision_acuities');
   }
 };

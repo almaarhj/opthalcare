@@ -9,24 +9,37 @@
                         {{ \App\Models\Patient::find(request()->route()->patient->id)->user->firstname }}
                     </h3>
                 </div>
-                <form wire:submit.prevent="updateAntenatal" class="row g-3">
+                <form action="{{ route('app.lab.store') }}" method="POST" class="row g-3">
+                    @csrf
+                    <input type="hidden" name="patient_id" value="{{ request()->route()->patient->id }}">
+                    <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                     <div class="col-12 col-md-12">
                         <label class="form-label">Lab Test</label>
-                        <select name="category_id" id="" class="form-control">
+                        <select name="test_id" id="" class="form-control">
                             <option value="">----</option>
-                            @foreach (\App\Models\LabCategory::all() as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @foreach (\App\Models\Laboratory::all() as $lab)
+                                <option value="{{ $lab->id }}">{{ $lab->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-12 col-md-12">
-                        <label class="form-label"> Name</label>
-                        <input type="text" name="name" class="form-control" placeholder="Name" />
+                        <label class="form-label"> Priority</label>
+                        <select name="priority" id="" class="form-control">
+                            <option value="">---</option>
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                            <option value="Urgent">Urgent</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-12">
+                        <label class="form-label">Request Note</label>
+                        <textarea name="request_note" class="form-control" id="" cols="30" rows="10"></textarea>
                     </div>
                     <div class="col-12 text-center">
                         <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
-                        <a href="{{ route('app.patient.draw', request()->route()->patient->id) }}"
-                            class="btn btn-label-secondary" target="_blank">Draw</a>
+                        <button data-bs-dismiss="modal" aria-label="Close"
+                            class="btn btn-label-secondary">Close</button>
                     </div>
                 </form>
             </div>

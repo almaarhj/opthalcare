@@ -9,10 +9,7 @@ use Illuminate\Http\Request;
 
 class RadiologyController extends Controller
 {
-  public function index()
-  {
-    return view('radiology.index');
-  }
+ 
 
   public function storeCategory(Request $request)
   {

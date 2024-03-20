@@ -9,14 +9,16 @@
                         {{ \App\Models\Patient::find(request()->route()->patient->id)->user->firstname }}
                     </h3>
                 </div>
-                <form wire:submit.prevent="updateAntenatal" class="row g-3">
+                <form action="{{ route('app.vision-acuity.store') }}" method="POST" class="row g-3">
+                    @csrf
+                    <input type="hidden" name="patient_id" value="{{ request()->route()->patient->id }}">
                     <div class="col-12 col-md-12">
                         <label class="form-label"> LEFT (OS)</label>
-                        <input type="number" name="left" class="form-control" placeholder="LEFT (OS)" />
+                        <input type="number" name="left_os" class="form-control" placeholder="LEFT (OS)" />
                     </div>
                     <div class="col-12 col-md-12">
                         <label class="form-label"> RIGHT (OD)</label>
-                        <input type="number" name="right" class="form-control" placeholder="RIGHT (OD)" />
+                        <input type="number" name="right_od" class="form-control" placeholder="RIGHT (OD)" />
                     </div>
                     <div class="col-12 text-center">
                         <button type="button" data-bs-dismiss="modal" aria-label="Close"

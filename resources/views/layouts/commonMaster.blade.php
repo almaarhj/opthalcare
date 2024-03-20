@@ -49,6 +49,7 @@
     <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
         {{ csrf_field() }}
     </form>
+   
     <script>
         @if (session()->has('success'))
             Swal.fire({

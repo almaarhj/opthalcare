@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Charts\BloodPressureChart;
+use App\Charts\PulseChart;
+use App\Charts\TemperatureChart;
+use App\Charts\WeightChart;
 use App\Models\HmoGroup;
 use App\Models\NextOfKin;
 use Jajo\NG;
@@ -72,11 +75,11 @@ class PatientController extends Controller
    * @param  \App\Models\Patient  $patient
    * @return \Illuminate\Http\Response
    */
-  public function show(BloodPressureChart $chart, Patient $patient)
+  public function show(BloodPressureChart $chart, PulseChart $pulse, TemperatureChart $temperature, WeightChart $weight, Patient $patient)
   {
     $checked_in = 1;
     if ($checked_in) {
-      return view('patients.show', ['patient' => $patient, 'chart' => $chart->build()]);
+      return view('patients.show', ['patient' => $patient, 'blood_pressure' => $chart->build($patient->id), 'pulse' => $pulse->build($patient->id), 'temperature' => $temperature->build($patient->id), 'weight' => $weight->build($patient->id)]);
     } else {
       return back()->with('error', 'Please Check-In the Patient');
     }
