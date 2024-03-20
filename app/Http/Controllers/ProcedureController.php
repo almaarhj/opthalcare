@@ -2,64 +2,34 @@
 
 namespace App\Http\Controllers;
 
+
+
 use App\Models\Procedure;
+use App\Models\ProcedureCategory;
 use Illuminate\Http\Request;
 
 class ProcedureController extends Controller
 {
-  /**
-   * Display a listing of the resource.
-   */
-  public function index()
+  
+  
+  public function storeProcedure(Request $request)
   {
-    return view('procedure.index');
+    $procedure = Procedure::create($request->all());
+    return redirect()->route('app.settings.procedures')->with('success', 'Procedure Added !');
   }
 
-  /**
-   * Show the form for creating a new resource.
-   */
-  public function create()
+  public function updateProcedure()
   {
-    //
   }
 
-  /**
-   * Store a newly created resource in storage.
-   */
-  public function store(Request $request)
+  public function storeCategory(Request $request)
   {
-    //
+    $category = ProcedureCategory::create($request->all());
+    // dd($request->all());
+    return redirect()->route('app.settings.procedures')->with('success', 'Procedure Category Added !');
   }
 
-  /**
-   * Display the specified resource.
-   */
-  public function show(Procedure $procedure)
+  public function UpdateCategory()
   {
-    //
-  }
-
-  /**
-   * Show the form for editing the specified resource.
-   */
-  public function edit(Procedure $procedure)
-  {
-    //
-  }
-
-  /**
-   * Update the specified resource in storage.
-   */
-  public function update(Request $request, Procedure $procedure)
-  {
-    //
-  }
-
-  /**
-   * Remove the specified resource from storage.
-   */
-  public function destroy(Procedure $procedure)
-  {
-    //
   }
 }
