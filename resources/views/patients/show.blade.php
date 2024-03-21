@@ -5,20 +5,31 @@
 @section('vendor-style')
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/flatpickr/flatpickr.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/theme.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/typography.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/katex.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/editor.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
-    {{-- <script src="{{ asset('lib/jquery-3.4.1.min.js') }}"></script> --}}
+    <link rel="stylesheet" href="{{ asset('assets/css/quill.snow.css') }}" />
+
+    {{--    <script src="{{asset('lib/jquery-3.4.1.min.js')}}"></script> --}}
+    {{--    <script src="{{asset('lib/jquery-migrate-1.2.1.min.js')}}"></script> --}}
+    {{--    <link rel="stylesheet" href="{{asset('assets/bootstrap.min.css')}}"/> --}}
+    {{--    <link href="{{asset('assets/font-awesome.min.css')}}" rel="stylesheet"> --}}
+    {{--    <link rel="stylesheet" href="{{asset('dist/drawerJs.css')}}"/> --}}
+    {{--    <script src="{{asset('dist/drawerJs.standalone.js')}}"></script> --}}
 @endsection
 
 {{-- @section('page-script')
     <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
 @endsection --}}
 @section('vendor-script')
+    <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+
     <script src="{{ asset('assets/vendor/libs/cleavejs/cleave.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/cleavejs/cleave-phone.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/swiper/swiper.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/moment/moment.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/flatpickr/flatpickr.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
@@ -283,7 +294,10 @@
                     <div class="tab-pane fade" id="navs-pills-justified-allergies" role="tabpanel">
                         <a href="" data-bs-toggle="modal" data-bs-target="#new-allergies-modal"
                             class="btn btn-primary mb-2 float-end">New Entry</a>
-                        <livewire:allergies />
+                        <livewire:allergies  :patientId="request()->route()->patient->id"/>
+                        {{-- for some reason when i try to access the re --}}
+                    @include('_partials._modals.modal-new-allergies')
+
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-diagnosis" role="tabpanel">
                         <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
