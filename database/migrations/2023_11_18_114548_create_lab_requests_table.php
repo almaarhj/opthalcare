@@ -16,7 +16,7 @@ return new class extends Migration
       $table->integer('patient_id');
       $table->integer('test_id');
       $table->integer('user_id');
-      $table->string('request_note');
+      $table->string('request_note')->nullable();
       $table->string('priority');
       $table->string('status');
       $table->timestamps();
