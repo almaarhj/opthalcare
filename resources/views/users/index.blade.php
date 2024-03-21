@@ -47,6 +47,6 @@
             <livewire:users/>
         </div>
     </div>
-    <!--/ DataTable with Buttons -->
+    <!--/DataTable with Buttons -->
 
 @endsection

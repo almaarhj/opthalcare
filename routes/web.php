@@ -99,7 +99,7 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], functi
   Route::post('procedures/{procedures}', [ProcedureController::class, 'updateProcedure'])->name('procedures.update');
   Route::post('procedures-category', [ProcedureController::class, 'storeCategory'])->name('procedures-category.store');
   Route::post('procedures-category/{category}', [ProcedureController::class, 'updateCategory'])->name('procedures-category.update');
- 
+
 
   // **** Radiology Routes
   Route::resource('radiology', RadiologyRequestController::class);

@@ -33,4 +33,8 @@ class LabRequest extends Model
   {
     return $this->belongsTo(User::class);
   }
+  public function user_details()
+  {
+    return $this->patient->user();
+  }
 }
