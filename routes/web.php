@@ -19,6 +19,7 @@ use App\Http\Controllers\HmoGroupController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\AdmissionController;
+use App\Http\Controllers\AllergyController;
 use App\Http\Controllers\AntenatalController;
 use App\Http\Controllers\ConsumbleController;
 use App\Http\Controllers\DashboardController;
@@ -120,5 +121,6 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], functi
   Route::get('settings/dialysis', [SystemSettingsController::class, 'RadiologySettings'])->name('settings.dialysis');
   Route::resource('categories', ServiceCategoryController::class);
   Route::resource('positions', PositionController::class);
+  Route::resource('allergies', AllergyController::class);
 });
 Route::get('getLGA/{state}', [DashboardController::class, 'getLGA']);
