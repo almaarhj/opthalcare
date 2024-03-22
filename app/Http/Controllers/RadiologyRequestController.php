@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\RadiologyRequestResourceCollection;
 use App\Models\RadiologyRequest;
 use Illuminate\Http\Request;
 
@@ -13,7 +12,6 @@ class RadiologyRequestController extends Controller
    */
   public function index()
   {
-
     return view('radiology.index');
   }
 
@@ -64,8 +62,6 @@ class RadiologyRequestController extends Controller
    */
   public function destroy(RadiologyRequest $radiologyRequest)
   {
-    dd("Dssd");
-   $radiologyRequest->delete();
-    return redirect()->back()->with('success', 'Request Deleted!');
+    //
   }
 }

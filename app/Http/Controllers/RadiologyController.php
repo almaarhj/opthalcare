@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class RadiologyController extends Controller
 {
-
+ 
 
   public function storeCategory(Request $request)
   {

@@ -42,10 +42,10 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="card-title mb-0">
-                        <h5 class="mb-0">Consumables Categories</h5>
+                        <h5 class="mb-0">Consumables </h5>
                     </div>
                     <a class="btn btn-label-dark waves-effect" href="javascript:void(0);" data-bs-toggle="modal"
-                        data-bs-target="#new-speciality-modal">New</a>
+                        data-bs-target="#new-consumables-modal">New</a>
                 </div>
                 <div class="card-body">
                     <livewire:consumables />
@@ -58,11 +58,11 @@
             <div class="card h-100">
                 <div class="card-header d-flex justify-content-between">
                     <div class="card-title mb-0">
-                        <h5 class="mb-0">Consumables Lists</h5>
+                        <h5 class="mb-0">Consumables Categories</h5>
                         {{-- <small class="text-muted">Average 72% Completed</small> --}}
                     </div>
                     <a class="btn btn-label-dark waves-effect" href="javascript:void(0);" data-bs-toggle="modal"
-                        data-bs-target="#new-consulting-template-modal">New</a>
+                        data-bs-target="#new-consumables-category-modal">New</a>
                 </div>
                 <div class="card-body">
                     <livewire:consumables-list />

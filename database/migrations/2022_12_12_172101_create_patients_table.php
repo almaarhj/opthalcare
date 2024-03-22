@@ -30,7 +30,7 @@ return new class extends Migration
       $table->string('state_of_origin')->nullable();
       $table->string('lga_of_origin')->nullable();
       $table->integer('hmo_id')->nullable();
-      $table->boolean('dependent')->nullable();
+      $table->string('dependent')->nullable();
       $table->string('principal_id')->nullable();
       $table->timestamps();
     });
