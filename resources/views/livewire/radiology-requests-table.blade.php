@@ -31,30 +31,10 @@
                     <select id="category_id" name="category_id" class="custom-select form-control filter">
                         <option value="">- All -</option>
 
-                        <option value="4">CT</option>
+                      @foreach ($radiologyCategories as $category  )
+                        <option value="{{$category->id}}">{{$category->name}}</option>
 
-                        <option value="3">ECG</option>
-
-                        <option value="10">ECHOCARDIOGRAPHY</option>
-
-                        <option value="8">EEG</option>
-
-                        <option value="7">ENDOSCOPY</option>
-
-                        <option value="12">LP WITH CSF PRESSURE MONITORING</option>
-
-                        <option value="9">MAMMOGRAPHY</option>
-
-                        <option value="11">MEDICAL REPORT</option>
-
-                        <option value="5">MRI</option>
-
-                        <option value="6">SPECIAL PROCEDURES</option>
-
-                        <option value="2">ULTRASOUND</option>
-
-                        <option value="1">X-RAY</option>
-
+                      @endforeach
                     </select>
                 </div>
                 <div class="form-group flex-fill ml-2">
@@ -126,26 +106,7 @@
 
 
             <div class="d-flex justify-content-around">
-
-                <ul class="pagination">
-
-                    <li class="page-item disabled">
-                        <a class="page-link" href="javascript:"><span class="oi oi-arrow-left"></span> Previous</a>
-                    </li>
-
-
-                    <li class="page-item active">
-
-                        <span class="page-link" href="javascript:"> 1 - 10 of 3,296</span>
-                    </li>
-
-
-                    <li class="page-item">
-                        <a class="page-link" href="javascript:" data-page="2"
-                            data-href="?status=pending&amp;page=2">Next <span class="oi oi-arrow-right"></span></a>
-                    </li>
-
-                </ul>
+               {{ $radiologyRequests->links('shared.custom-pagination') }}
                 <input type="hidden" class="sr-only filter" name="page" value="1">
 
             </div>
