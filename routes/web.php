@@ -93,6 +93,11 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], functi
   Route::resource('vision-acuity', VisionAcuityController::class);
   Route::post('lab-category', [LaboratoryController::class, 'storeCategory'])->name('lab-category.store');
 
+  Route::post('consumables-add', [ConsumbleController::class, 'storeConsumables'])->name('consumables-add.store');
+  Route::post('consumables-add/{drugs}', [ConsumbleController::class, 'updateConsumables'])->name('consumables-add.update');
+  Route::post('consumables-category', [ConsumbleController::class, 'storeCategory'])->name('consumables-category.store');
+  Route::post('consumables-category/{category}', [ConsumbleController::class, 'updateCategory'])->name('consumables-category.update');
+
 
   Route::resource('procedures', ProcedureController::class);
   Route::post('procedures', [ProcedureController::class, 'storeProcedure'])->name('procedures.store');
