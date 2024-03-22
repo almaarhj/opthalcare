@@ -25,7 +25,7 @@
                                 <tbody>
                                     <tr>
                                         <th scope="row">
-                                            <?
+                                            <?php
                                             $parameter_options = array(
                                             "" => "---------",
                                             "Temperature" => "Temperature",
