@@ -37,22 +37,12 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6"> <label for="id_start">
-                                Start<span class="align-middle fa-2x- text-danger"> *</span> </label> <input
-                                type="hidden" name="start" data-toggle="flatpickr" data-enable-time="true"
-                                data-alt-input="true" data-alt-format="F j, Y h:iK" data-date-format="Y-m-d H:i"
-                                class="datetimeinput form-control flatpickr-input" autocomplete="off" required=""
-                                id="id_start"><input class="datetimeinput form-control form-control input"
-                                placeholder="" required="" tabindex="0" type="text" readonly="readonly">
-                            <small><span class="form-text text-muted" data-help-text=""></span></small>
+                                Start<span class="align-middle fa-2x- text-danger"> *</span> </label>
+                            <input type="date" class="form-control" name="start" id="">
                         </div>
                         <div class="form-group col-md-6"> <label for="id_end">
-                                End<span class="align-middle fa-2x- text-danger"> *</span> </label> <input
-                                type="hidden" name="end" data-toggle="flatpickr" data-enable-time="true"
-                                data-alt-input="true" data-alt-format="F j, Y h:iK" data-date-format="Y-m-d H:i"
-                                class="datetimeinput form-control flatpickr-input" autocomplete="off" required=""
-                                id="id_end"><input class="datetimeinput form-control form-control input"
-                                placeholder="" required="" tabindex="0" type="text" readonly="readonly">
-                            <small><span class="form-text text-muted" data-help-text=""></span></small>
+                                End<span class="align-middle fa-2x- text-danger"> *</span> </label>
+                            <input type="date" class="form-control" name="end" id="">
                         </div>
 
                     </div>

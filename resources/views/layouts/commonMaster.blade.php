@@ -10,7 +10,7 @@
     <meta charset="utf-8" />
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
     <title>@yield('title') |
         {{ app(App\Settings\SystemSettings::class)->clinic_name ?: 'Clinic' }}
@@ -49,7 +49,7 @@
     <form id="logoutform" action="{{ route('logout') }}" method="POST" style="display: none;">
         {{ csrf_field() }}
     </form>
-   
+
     <script>
         @if (session()->has('success'))
             Swal.fire({

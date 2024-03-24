@@ -43,7 +43,7 @@ class VitalsController extends Controller
         'patient_id' => $patient
       ]);
     }
-    return redirect()->back()->with('success', 'Vital Recorded!');
+    return redirect()->route('app.patients.show', $patient)->with('success', 'Vital Recorded!');
   }
 
   /**

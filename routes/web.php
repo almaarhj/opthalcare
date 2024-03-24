@@ -2,6 +2,7 @@
 
 use App\Models\Consumble;
 use App\Models\Appointment;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BedController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WardController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\VitalsController;
+use App\Http\Controllers\AllergyController;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\HmoPlanController;
 use App\Http\Controllers\MessageController;
@@ -21,7 +23,6 @@ use App\Http\Controllers\PharmacyController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ReligionController;
 use App\Http\Controllers\AdmissionController;
-use App\Http\Controllers\AllergyController;
 use App\Http\Controllers\AntenatalController;
 use App\Http\Controllers\ConsumbleController;
 use App\Http\Controllers\DashboardController;
@@ -142,3 +143,5 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], functi
   Route::resource('allergies', AllergyController::class);
 });
 Route::get('getLGA/{state}', [DashboardController::class, 'getLGA']);
+
+URL::forceScheme('https');
