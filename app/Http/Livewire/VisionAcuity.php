@@ -27,6 +27,15 @@ class VisionAcuity extends Base
     $this->dispatchBrowserEvent('VaEditModal');
   }
 
+  public function showVa(ModelVisionAcuity $va)
+  {
+    $this->VaId = $va->id;
+    $this->left = $va->left_os;
+    $this->right = $va->right_od;
+
+    $this->dispatchBrowserEvent('VaShowModal');
+  }
+
   public function updateVa()
   {
     ModelVisionAcuity::where('id', $this->VaId)->update(['left_os' => $this->left, 'right_od' => $this->right]);

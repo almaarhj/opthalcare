@@ -25,4 +25,8 @@ class Radiology extends Model
   {
     return $this->hasOne(RadiologyTemplate::class, 'template_id');
   }
+  public static function getServiceType()
+  {
+    return 'radiology';
+  }
 }

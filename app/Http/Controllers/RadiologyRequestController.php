@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RadiologyRequest;
+use App\Models\Radiology;
 use Illuminate\Http\Request;
+use App\Models\RadiologyRequest;
+use App\Services\ServiceRequestHandler;
 
 class RadiologyRequestController extends Controller
 {
@@ -29,7 +31,9 @@ class RadiologyRequestController extends Controller
   public function store(Request $request)
   {
     $imagingrequest = RadiologyRequest::create(array_merge($request->except('status'), ['status' => 'Pending']));
-    // dd($request->all());
+    $imaging = Radiology::find($request->imaging_id);
+    $serviceHandler = new ServiceRequestHandler();
+    $billingRecord = $serviceHandler->handleServiceRequest($imaging->name, $request->patient_id, 'Radiology');
     return redirect()->back()->with('success', 'Imaging Requested!');
   }
 

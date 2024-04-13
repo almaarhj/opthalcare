@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Admission extends Model
 {
-    use HasFactory;
+  use HasFactory;
+
+  public static function getServiceType()
+  {
+    return 'admission';
+  }
 }

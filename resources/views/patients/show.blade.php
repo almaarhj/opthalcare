@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/katex.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/editor.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/quill.snow.css') }}" />
+    <link rel="stylesheet" href="{{ asset('easyeditor.css') }}">
 
     {{--    <script src="{{asset('lib/jquery-3.4.1.min.js')}}"></script> --}}
     {{--    <script src="{{asset('lib/jquery-migrate-1.2.1.min.js')}}"></script> --}}
@@ -104,7 +105,7 @@
                     <div class="badge rounded-pill p-2 bg-label-success mb-2">
                         <i class="ti ti-briefcase ti-sm"></i>
                     </div>
-                    <h5 class="card-title mb-2">0.00</h5>
+                    <h5 class="card-title mb-2">{{ number_format($wallet_balance) }}</h5>
                     <small>Wallet Balance</small>
                 </div>
             </div>
@@ -115,11 +116,9 @@
                     <div class="badge rounded-pill p-2 bg-label-danger mb-2">
                         <i class="ti ti-briefcase ti-sm"></i>
                     </div>
-                    <h5 class="card-title mb-2">0.00</h5>
+                    <h5 class="card-title mb-2">{{ number_format($outstanding_balance) }}</h5>
                     <small>Outstanding Balance</small>
-                    @if (session()->has('success'))
-                        {{ session()->get('success') }}
-                    @endif
+
                 </div>
             </div>
         </div>
@@ -217,22 +216,7 @@
             <div class="card">
                 <div class="tab-content">
                     <div class="tab-pane fade active show" id="navs-pills-justified-visits" role="tabpanel">
-                        <table class="table">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Date of Visit</th>
-                                    <th>Triage Time</th>
-                                    <th>Clinic</th>
-                                    <th>Specialty</th>
-                                    <th>Status</th>
-                                    <th>---</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-
-                        </table>
+                        <livewire:visits :patientId="$patient->id" />
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-vitals" role="tabpanel">
                         <div class="row">
@@ -294,15 +278,15 @@
                     <div class="tab-pane fade" id="navs-pills-justified-allergies" role="tabpanel">
                         <a href="" data-bs-toggle="modal" data-bs-target="#new-allergies-modal"
                             class="btn btn-primary mb-2 float-end">New Entry</a>
-                        <livewire:allergies  :patientId="request()->route()->patient->id"/>
+                        <livewire:allergies :patientId="request()->route()->patient->id" />
                         {{-- for some reason when i try to access the re --}}
-                    @include('_partials._modals.modal-new-allergies')
+                        @include('_partials._modals.modal-new-allergies')
 
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-diagnosis" role="tabpanel">
                         <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
                             class="btn btn-primary mb-2 float-end">New Entry</a>
-                        <livewire:diagnoses />
+                        <livewire:diagnoses :patientId="request()->route()->patient->id" />
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-lab" role="tabpanel">
                         <a href="" data-bs-toggle="modal" data-bs-target="#new-lab-modal"
@@ -312,23 +296,9 @@
 
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-drugs" role="tabpanel">
-                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-drugs-modal"
                             class="btn btn-primary mb-2 float-end">New Entry</a>
-                        <table class="table">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Date of Request</th>
-                                    <th>Drug/Generic</th>
-                                    <th>User</th>
-                                    <th>Status</th>
-                                    <th>---</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-
-                        </table>
+                        <livewire:drugs-request :patientId="$patient->id" />
                         @include('_partials._modals.modal-new-drugs')
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-imaging" role="tabpanel">
@@ -338,31 +308,9 @@
                         @include('_partials._modals.modal-new-imaging')
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-procedures" role="tabpanel">
-                        <a href="" data-bs-toggle="modal" data-bs-target="#new-diagnosis-modal"
+                        <a href="" data-bs-toggle="modal" data-bs-target="#new-procedures-modal"
                             class="btn btn-primary mb-2 float-end">New Entry</a>
-                        <table class="table">
-                            <!-- thead -->
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Request Date</th>
-
-                                    <th>Procedure</th>
-                                    <th>Status</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- tr -->
-
-                                <tr>
-                                    <td colspan="6">
-                                        <div class="alert alert-warning">No Record to Display</div>
-                                    </td>
-                                </tr>
-
-                            </tbody><!-- /tbody -->
-
-                        </table>
+                        <livewire:procedure-requests :patientId="$patient->id" />
                         @include('_partials._modals.modal-new-procedures')
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-opd" role="tabpanel">

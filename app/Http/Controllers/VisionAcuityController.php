@@ -37,7 +37,8 @@ class VisionAcuityController extends Controller
    */
   public function show(VisionAcuity $visionAcuity)
   {
-    //
+    // dd($visionAcuity);
+    return view('va.details', compact('visionAcuity'));
   }
 
   /**

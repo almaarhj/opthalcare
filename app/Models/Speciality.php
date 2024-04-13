@@ -14,4 +14,9 @@ class Speciality extends Model
     'price',
     'follow_up_price'
   ];
+
+  public static function getServiceType()
+  {
+    return 'speciality';
+  }
 }

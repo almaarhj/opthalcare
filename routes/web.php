@@ -6,10 +6,12 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BedController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\DrugController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WardController;
+use App\Http\Controllers\ICD10Controller;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\VitalsController;
 use App\Http\Controllers\AllergyController;
@@ -26,6 +28,8 @@ use App\Http\Controllers\AdmissionController;
 use App\Http\Controllers\AntenatalController;
 use App\Http\Controllers\ConsumbleController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DiagnosisController;
+use App\Http\Controllers\DrugStoreController;
 use App\Http\Controllers\ProcedureController;
 use App\Http\Controllers\RadiologyController;
 use App\Http\Controllers\DepartmentController;
@@ -39,9 +43,11 @@ use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\ConsultingRoomController;
 use App\Http\Controllers\SystemSettingsController;
 use App\Http\Controllers\AppointmentTypeController;
+use App\Http\Controllers\CashPointController;
 use App\Http\Controllers\ServiceCategoryController;
 use App\Http\Controllers\RadiologyRequestController;
 use App\Http\Controllers\ConsultingTemplateController;
+use App\Http\Controllers\VitalRefController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,9 +70,12 @@ Auth::routes();
 Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], function () {
   Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
   Route::resource('users', UserController::class);
+  Route::resource('diagnosis', DiagnosisController::class);
+  Route::get('diagnosis/{id}', [DiagnosisController::class, 'show']);
   Route::resource('roles', RoleController::class);
   Route::resource('patients', PatientController::class);
   Route::get('patient/draw/{id}', [PatientController::class, 'draw'])->name('patient.draw');
+  Route::get('patient/check-in/{id}', [PatientController::class, 'checkIn'])->name('patient.checkIn');
   Route::resource('hmos', HmoGroupController::class);
   Route::resource('departments', DepartmentController::class);
   Route::resource('documents', DocumentController::class);
@@ -87,11 +96,14 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], functi
   Route::post('lab-test/{test}', [LaboratoryController::class, 'update'])->name('lab-test.update');
   Route::post('drugs-add', [DrugController::class, 'storeDrugs'])->name('drugs-add.store');
   Route::post('drugs-add/{drugs}', [DrugController::class, 'updateDrugs'])->name('drugs-add.update');
+  Route::post('drugs-store', [DrugStoreController::class, 'store'])->name('drugs-store.store');
   Route::post('drugs-category', [DrugController::class, 'storeCategory'])->name('drugs-category.store');
   Route::post('drugs-category/{category}', [DrugController::class, 'updateCategory'])->name('drugs-category.update');
   Route::resource('lab', LabRequestController::class);
+  Route::get('lab/specimen/{lab}', [LabRequestController::class, 'specimen'])->name('lab.specimen');
   Route::resource('vitals', VitalsController::class);
   Route::resource('vision-acuity', VisionAcuityController::class);
+  Route::get('vision-acuity/{id}', [VisionAcuityController::class, 'show']);
   Route::post('lab-category', [LaboratoryController::class, 'storeCategory'])->name('lab-category.store');
 
   Route::post('consumables-add', [ConsumbleController::class, 'storeConsumables'])->name('consumables-add.store');
@@ -101,8 +113,8 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], functi
 
 
   Route::resource('procedures', ProcedureController::class);
-  Route::post('procedures', [ProcedureController::class, 'storeProcedure'])->name('procedures.store');
-  Route::post('procedures/{procedures}', [ProcedureController::class, 'updateProcedure'])->name('procedures.update');
+  Route::post('procedure', [ProcedureController::class, 'storeProcedure'])->name('procedure.store');
+  Route::post('procedure/{procedures}', [ProcedureController::class, 'updateProcedure'])->name('procedure.update');
   Route::post('procedures-category', [ProcedureController::class, 'storeCategory'])->name('procedures-category.store');
   Route::post('procedures-category/{category}', [ProcedureController::class, 'updateCategory'])->name('procedures-category.update');
 
@@ -118,6 +130,8 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], functi
 
   Route::resource('wait-list', WaitingListController::class);
   Route::resource('consumables', ConsumbleController::class);
+  Route::resource('icd', ICD10Controller::class);
+  Route::resource('tags', TagController::class);
   Route::resource('admissions', AdmissionController::class);
   Route::resource('billing', BillingController::class);
   Route::resource('antenatals', AntenatalController::class);
@@ -141,7 +155,12 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], functi
   Route::resource('categories', ServiceCategoryController::class);
   Route::resource('positions', PositionController::class);
   Route::resource('allergies', AllergyController::class);
+  Route::resource('vitalRefs', VitalRefController::class);
+  Route::resource('cashpoints', CashPointController::class);
 });
 Route::get('getLGA/{state}', [DashboardController::class, 'getLGA']);
+Route::post('getDrugsCategorybyStore', [DrugController::class, 'getDrugsCategorybyStore']);
+Route::post('getDrugsbyStore', [DrugController::class, 'getDrugsbyStore']);
 
-URL::forceScheme('https');
+
+// URL::forceScheme('https');

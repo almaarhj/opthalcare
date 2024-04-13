@@ -57,14 +57,14 @@ class SystemSettingsController extends Controller
 
   public function updateSystemSettings(Request $request, SystemSettings $system)
   {
-    $this->validate($request, [
-      'clinic_name' => 'required',
-      'address' => 'required',
-      'footer' => 'required',
-      'logo' => 'nullable|file|image',
-      'favicon' => 'nullable|file|image',
+    // $this->validate($request, [
+    //   'clinic_name' => 'required',
+    //   'address' => 'required',
+    //   'footer' => 'required',
+    //   'logo' => 'nullable|file|image',
+    //   'favicon' => 'nullable|file|image',
 
-    ]);
+    // ]);
 
     if ($request->hasFile('logo')) {
       $logo = time() . '.' . $request->logo->extension();
@@ -85,7 +85,11 @@ class SystemSettingsController extends Controller
 
     $system->address = $request->address;
     $system->footer = $request->footer;
+    $system->number_prefix = $request->number_prefix;
+    $system->insurance_providers = $request->has('insurance_providers');
+    $system->auto_bill = $request->has('auto_bill');
+    $system->check_in = $request->has('check_in');
     $system->save();
-    return redirect()->route('app.dashboard')->with('System Settings Has Been Updated');
+    return redirect()->route('app.settings.index')->with('System Settings Has Been Updated');
   }
 }

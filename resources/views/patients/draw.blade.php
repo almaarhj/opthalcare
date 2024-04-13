@@ -32,6 +32,7 @@
     <br />
     <input type="button" id="btnSave" value="Save as Image" />
     <hr />
+    <input type="hidden" id="sketch">
     <img id = "imgCapture" alt = "" style = "display:none;border:1px solid #ccc" />
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script src="https://cdn.rawgit.com/mobomo/sketch.js/master/lib/sketch.min.js" type="text/javascript"></script>
@@ -46,14 +47,11 @@
             $("#btnSave").bind("click", function() {
                 var base64 = $('#colors_sketch')[0].toDataURL();
                 $("#imgCapture").attr("src", base64);
+                $("#sketch").attr("value", base64);
+
                 $("#imgCapture").show();
             });
 
-            $("#btnSave").bind("click", function() {
-                var base64 = $('#colors_sketch')[0].toDataURL();
-                $("#imgCapture").attr("src", base64);
-                $("#imgCapture").show();
-            });
         });
     </script>
 </body>

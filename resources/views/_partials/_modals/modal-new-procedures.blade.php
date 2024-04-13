@@ -9,12 +9,25 @@
                         {{ \App\Models\Patient::find(request()->route()->patient->id)->user->firstname }}
                     </h3>
                 </div>
-                <form wire:submit.prevent="updateAntenatal" class="row g-3">
-
-                    
-                      <div class="col-12 text-center">
+                <form action="{{ route('app.procedures.store') }}" method="POST" class="row g-3">
+                    @csrf
+                    <input type="hidden" name="patient_id" value="{{ request()->route()->patient->id }}">
+                    <div class="col-6 col-md-6">
+                        <label class="form-label">Procedure</label>
+                        <select name="procedure_id" id="" class="form-control">
+                            <option value="">----</option>
+                            @foreach (\App\Models\Procedure::all() as $procedure)
+                                <option value="{{ $procedure->id }}">{{ $procedure->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-6 col-md-6">
+                        <label class="form-label"> ICD10</label>
+                        <input type="text" name="ICD10" class="form-control" placeholder="ICD10" />
+                    </div>
+                    <div class="col-12 text-center">
                         <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
-                        <a href="{{route('app.patient.draw', request()->route()->patient->id)}}" class="btn btn-label-secondary" target="_blank">Draw</a>
+
                     </div>
                 </form>
             </div>

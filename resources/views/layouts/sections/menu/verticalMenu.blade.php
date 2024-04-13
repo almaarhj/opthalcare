@@ -27,56 +27,65 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
+
         <li class="menu-item  {{ request()->is('app/dashboard') ? 'active' : '' }}">
             <a href="{{ route('app.dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-apps"></i>
                 <div>Dashboard</div>
             </a>
         </li>
-        <li class="menu-item {{ request()->is('app/users/') ? 'open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-lock"></i>
-                <div>Authentication</div>
-            </a>
+        @can('read-users')
+            <li class="menu-item {{ request()->is('app/users/') ? 'open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-lock"></i>
+                    <div>Authentication</div>
+                </a>
 
 
-            <ul class="menu-sub">
-                <li class="menu-item {{ request()->is('app/users') ? 'active' : '' }}">
-                    <a href="{{ route('app.users.index') }}" class="menu-link">
-                        <div>Users</div>
-                    </a>
-                </li>
-                <li class="menu-item {{ request()->is('app/roles') ? 'active' : '' }}">
-                    <a href="{{ route('app.roles.index') }}" class="menu-link">
-                        <div>Roles</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
-      <li class="menu-item ">
-        <a href="{{ route('app.patients.index') }}" class="menu-link">
-          <i class="menu-icon tf-icons ti ti-users"></i>
-          <div>Patients</div>
-        </a>
-      </li>
+                <ul class="menu-sub">
+                    <li class="menu-item {{ request()->is('app/users') ? 'active' : '' }}">
+                        <a href="{{ route('app.users.index') }}" class="menu-link">
+                            <div>Users</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ request()->is('app/roles') ? 'active' : '' }}">
+                        <a href="{{ route('app.roles.index') }}" class="menu-link">
+                            <div>Roles</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endcan
         <li class="menu-item ">
-            <a href="{{ route('app.appointments.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-calendar"></i>
-                <div>Appointments</div>
+            <a href="{{ route('app.patients.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-users"></i>
+                <div>Patients</div>
             </a>
         </li>
-        <li class="menu-item ">
-            <a href="{{ route('app.wait-list.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons ti ti-clock"></i>
-                <div>Waiting List</div>
-            </a>
-        </li>
+        @can('read-appointments')
+            <li class="menu-item ">
+                <a href="{{ route('app.appointments.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-calendar"></i>
+                    <div>Appointments</div>
+                </a>
+            </li>
+        @endcan
+        @can('waiting-list')
+            <li class="menu-item ">
+                <a href="{{ route('app.wait-list.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-clock"></i>
+                    <div>Waiting List</div>
+                </a>
+            </li>
+        @endcan
+
         <li class="menu-item ">
             <a href="{{ route('app.pharmacy.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-prescription"></i>
                 <div>Pharmacy</div>
             </a>
         </li>
+
         <li class="menu-item ">
             <a href="{{ route('app.lab.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-vaccine"></i>
@@ -89,12 +98,12 @@
                 <div>Radiology</div>
             </a>
         </li>
-        <li class="menu-item ">
+        {{-- <li class="menu-item ">
             <a href="{{ route('app.consumables.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-pills"></i>
                 <div>Consumables</div>
             </a>
-        </li>
+        </li> --}}
         <li class="menu-item ">
             <a href="{{ route('app.admissions.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-bed"></i>

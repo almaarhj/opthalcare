@@ -11,7 +11,17 @@ class VisionAcuity extends Model
 
   protected $fillable = [
     'patient_id',
-    'left_os',
-    'right_od',
+    'right',
+    'left',
+    'left_pinhole',
+    'right_pinhole',
+    'left_glasses',
+    'right_glasses',
+    'disablities',
   ];
+
+  public function patient()
+  {
+    return $this->belongsTo(Patient::class);
+  }
 }

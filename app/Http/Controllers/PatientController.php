@@ -2,17 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Charts\BloodPressureChart;
-use App\Charts\PulseChart;
-use App\Charts\TemperatureChart;
-use App\Charts\WeightChart;
-use App\Models\HmoGroup;
-use App\Models\NextOfKin;
 use Jajo\NG;
 use App\Models\User;
+use App\Models\Visit;
+use App\Models\CheckIn;
 use App\Models\Patient;
+use App\Models\HmoGroup;
 use App\Models\Religion;
+use App\Models\NextOfKin;
+use App\Charts\PulseChart;
+use App\Models\Speciality;
+use App\Charts\WeightChart;
 use Illuminate\Http\Request;
+use App\Charts\TemperatureChart;
+use App\Services\CheckInService;
+use App\Charts\BloodPressureChart;
+use App\Models\Billing;
+use App\Services\ServiceRequestHandler;
+use Illuminate\Support\Facades\Validator;
 use sirajcse\UniqueIdGenerator\UniqueIdGenerator;
 
 class PatientController extends Controller
@@ -50,11 +57,72 @@ class PatientController extends Controller
    */
   public function store(Request $request)
   {
+    // Validation rules for all fields
+    $rules = [
+      'firstname' => 'required|string|max:255',
+      'lastname' => 'required|string|max:255',
+      'email' => 'required|email|unique:users,email',
+      'phone' => 'required|string|max:20',
+      'date_of_birth' => 'required|date',
+      'gender' => 'required|in:Male,Female,Other',
+      'religion_id' => 'required|integer',
+      'next_of_kin_name' => 'required|string|max:255',
+      'next_of_kin_relation' => 'required|string|max:255',
+      'next_of_kin_phone' => 'required|string|max:20',
+      'next_of_kin_address' => 'required|string|max:255',
+      'marital_status' => 'required|string',
+      'occupation' => 'required|string',
+      'state_of_residence' => 'required|string',
+      'lga_of_residence' => 'required|string',
+      'state_of_origin' => 'required|string',
+      'lga_of_origin' => 'required|string',
+      'residential_address' => 'required|string',
+
+      // Add more validation rules as needed
+    ];
+
+    // Custom validation messages
+    $messages = [
+      // Custom messages for each field
+      'firstname.required' => 'The First Name field is required.',
+      'lastname.required' => 'The Last Name field is required.',
+      'email.required' => 'The email field is required.',
+      'email.email' => 'The email must be a valid email address.',
+      'email.unique' => 'The email has already been taken.',
+      'phone.required' => 'The phone field is required.',
+      'date_of_birth.required' => 'The date of birth field is required.',
+      'gender.required' => 'The gender field is required.',
+      'religion_id.required' => 'The religion field is required.',
+      'next_of_kin_name.required' => 'The next of kin name field is required.',
+      'next_of_kin_relation.required' => 'The next of kin relation field is required.',
+      'next_of_kin_phone.required' => 'The next of kin phone field is required.',
+      'next_of_kin_address.required' => 'The next of kin address field is required.',
+      'marital_status.required' => 'The marital status field is required.',
+      'occupation.required' => 'The occupation field is required.',
+      'state_of_residence.required' => 'The state of residence field is required.',
+      'lga_of_residence.required' => 'The lga of residence field is required.',
+      'state_of_origin.required' => 'The state of origin field is required.',
+      'lga_of_origin.required' => 'The lga of origin field is required.',
+      'residential_address.required' => 'The residential address field is required.',
+      // Add more custom messages as needed
+    ];
+    $validator = Validator::make($request->all(), $rules, $messages);
+
+    // Check if validation fails
+    if ($validator->fails()) {
+      return redirect()->back()
+        ->withErrors($validator)
+        ->withInput();
+    }
     $user = User::create(array_merge($request->except(['date_of_birth', 'gender', 'password']), ['password' => bcrypt($request->password)]));
     $user->assignRole('patient');
     $hospital_no = UniqueIdGenerator::generate(['table' => 'patients', 'length' => 4,]);
     $patient = Patient::create(array_merge($request->except(['password', 'next_of_kin_name', 'next_of_kin_relation', 'next_of_kin_phone', 'next_of_kin_address']), ['hospital_no' => $hospital_no, 'user_id' => $user->id]));
     $next_of_kin = NextOfKin::create(array_merge($request->only(['next_of_kin_name', 'next_of_kin_relation', 'next_of_kin_phone', 'next_of_kin_address']), ['user_id' => $user->id]));
+    $service = Speciality::where('name', 'Enrollment Fee')->first();
+    $serviceHandler = new ServiceRequestHandler();
+    $billingRecord = $serviceHandler->handleServiceRequest('Enrollment Fee', $patient->id, 'Consultation');
+    $visit = Visit::create(['patient_id' => $patient->id, 'speciality' => 'Enrollement', 'status' => 'Concluded']);
     return redirect()->route('app.patients.index')->with('success', 'Patient Created Successfully');
   }
 
@@ -77,9 +145,12 @@ class PatientController extends Controller
    */
   public function show(BloodPressureChart $chart, PulseChart $pulse, TemperatureChart $temperature, WeightChart $weight, Patient $patient)
   {
-    $checked_in = 1;
-    if ($checked_in) {
-      return view('patients.show', ['patient' => $patient, 'blood_pressure' => $chart->build($patient->id), 'pulse' => $pulse->build($patient->id), 'temperature' => $temperature->build($patient->id), 'weight' => $weight->build($patient->id)]);
+
+    $checkInService = new CheckInService();
+    $oustanding_balance = Billing::where('user_id', $patient->id)->where('status', 0)->sum('amount');
+    $wallet_balance = 0;
+    if ($checkInService->hasCheckedInToday($patient->id)) {
+      return view('patients.show', ['patient' => $patient, 'blood_pressure' => $chart->build($patient->id), 'pulse' => $pulse->build($patient->id), 'temperature' => $temperature->build($patient->id), 'weight' => $weight->build($patient->id), 'outstanding_balance' => $oustanding_balance, 'wallet_balance' => $wallet_balance]);
     } else {
       return back()->with('error', 'Please Check-In the Patient');
     }
@@ -104,6 +175,20 @@ class PatientController extends Controller
   public function draw(Patient $patient)
   {
     return view('patients.draw');
+  }
+
+  public function checkIn($patient)
+  {
+    $checkInService = new CheckInService();
+    if ($checkInService->hasCheckedInToday($patient)) {
+      return back()->with('error', 'Patient has checked in already');
+    } else {
+      $checkIn = CheckIn::create([
+        'patient_id' => $patient,
+        'check_in_date' => now()->toDateString(),
+      ]);
+      return back()->with('success', 'Patient checked in Successfully');
+    }
   }
 
   /**

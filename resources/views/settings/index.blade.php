@@ -29,7 +29,7 @@
 
     <div class="row">
         <!-- Monthly Campaign State -->
-        <div class="col-xl-4 col-md-4 mb-4">
+        <div class="col-xl-12 col-md-12 mb-4">
             <div class="card">
                 <div class="card-header d-flex justify-content-between">
                     <div class="card-title mb-0">
@@ -48,35 +48,87 @@
                 </div>
                 <div class="card-body">
                     <h6>Change System Settings Here</h6>
+                    <form action="{{ route('app.update.system.settings') }}" method="POST" enctype="multipart/form-data"
+                        class="row">
+                        @csrf
+                        <div class="form-group col-md-6">
+                            Clinic Name
+                            <input type="text" name="clinic_name" value="{{ $system->clinic_name }}"
+                                class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+                            Clinic Logo
+                            <input type="file" name="logo" value="" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+                            Clinic Logo
+                            <input type="file" name="favicon" value="" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+                            Footer
+                            <input type="text" class="form-control" name="footer" value="{{ $system->footer }}">
+                        </div>
+                        <div class="form-group col-md-6">
+                            Medical Record Number Prefix
+                            <input type="text" class="form-control" name="number_prefix"
+                                value="{{ $system->number_prefix }}">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p></p>
+                            <div class="text-light small fw-medium mb-3">Insurrance Providers</div>
+                            <label class="switch">
+                                <input type="checkbox" name="insurance_providers"
+                                    {{ $system->insurance_providers ? 'checked' : '' }} class="switch-input">
+                                <span class="switch-toggle-slider">
+                                    <span class="switch-on"></span>
+                                    <span class="switch-off"></span>
+                                </span>
+                                <span class="switch-label">{{ $system->insurance_providers ? 'ON' : 'OFF' }} </span>
+                            </label>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p></p>
+                            <div class="text-light small fw-medium mb-3">Auto Billing</div>
+                            <label class="switch">
+                                <input type="checkbox" name="auto_bill" {{ $system->auto_bill ? 'checked' : '' }}
+                                    class="switch-input">
+                                <span class="switch-toggle-slider">
+                                    <span class="switch-on"></span>
+                                    <span class="switch-off"></span>
+                                </span>
+                                <span class="switch-label">{{ $system->auto_bill ? 'ON' : 'OFF' }} </span>
+                            </label>
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p></p>
+                            <div class="text-light small fw-medium mb-3">Auto Check-In</div>
+                            <label class="switch">
+                                <input type="checkbox" name="check_in" {{ $system->check_in ? 'checked' : '' }}
+                                    class="switch-input">
+                                <span class="switch-toggle-slider">
+                                    <span class="switch-on"></span>
+                                    <span class="switch-off"></span>
+                                </span>
+                                <span class="switch-label">{{ $system->check_in ? 'ON' : 'OFF' }} </span>
+                            </label>
+
+                        </div>
+                        <div class="form-group col-md-12">
+                            Address
+                            <textarea class="form-control" rows="10" name="address">{{ $system->address }}</textarea>
+                        </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    </form>
                 </div>
             </div>
         </div>
         <!--/ Monthly Campaign State -->
 
         <!-- Active Projects -->
-        <div class="col-xl-8 col-md-8 mb-4">
-            <div class="card h-100">
-                <div class="card-header d-flex justify-content-between">
-                    <div class="card-title mb-0">
-                        <h5 class="mb-0">Services</h5>
-                        {{-- <small class="text-muted">Average 72% Completed</small> --}}
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn p-0" type="button" id="activeProjects" data-bs-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            <i class="ti ti-dots-vertical ti-sm text-muted"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="activeProjects">
-                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
-                                data-bs-target="#newService">New Service</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <livewire:service-categories />
-                </div>
-            </div>
-        </div>
+
         <!--/ Active Projects -->
 
         <!-- Earning Reports -->
@@ -127,54 +179,148 @@
                 </div>
             </div>
         </div>
-        <!-- Sales By Country -->
         <div class="col-xl-12 col-md-12 mb-4">
             <div class="card h-100">
                 <div class="card-header d-flex justify-content-between">
-                    <div class="card-title mb-0">
-                        <h5 class="m-0 me-2">HMO Groups</h5>
-                        {{-- <small class="text-muted">Monthly Sales Overview</small> --}}
+                    <div class="card-title m-0 me-2">
+                        <h5 class="m-0 me-2">ICD</h5>
                     </div>
                     <div class="dropdown">
-                        <button class="btn p-0" type="button" id="salesByCountry" data-bs-toggle="dropdown"
+                        <button class="btn p-0" type="button" id="employeeList" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             <i class="ti ti-dots-vertical ti-sm text-muted"></i>
                         </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="salesByCountry">
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="employeeList">
                             <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
-                                data-bs-target="#newHmoGroup">New Hmo Group</a>
+                                data-bs-target="#new-icd-modal">New ICD</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <livewire:hmo-groups />
+                    <livewire:i-c-d />
+                    @include('_partials._modals.modal-new-icd')
                 </div>
             </div>
         </div>
-        <!--/ Sales By Country -->
         <div class="col-xl-12 col-md-12 mb-4">
             <div class="card h-100">
                 <div class="card-header d-flex justify-content-between">
-                    <div class="card-title mb-0">
-                        <h5 class="m-0 me-2">HMO Plans</h5>
-                        {{-- <small class="text-muted">Monthly Sales Overview</small> --}}
+                    <div class="card-title m-0 me-2">
+                        <h5 class="m-0 me-2">Patient Tags</h5>
                     </div>
                     <div class="dropdown">
-                        <button class="btn p-0" type="button" id="salesByCountry" data-bs-toggle="dropdown"
+                        <button class="btn p-0" type="button" id="employeeList" data-bs-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
                             <i class="ti ti-dots-vertical ti-sm text-muted"></i>
                         </button>
-                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="salesByCountry">
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="employeeList">
                             <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
-                                data-bs-target="#newHmoGroup">New Hmo Group</a>
+                                data-bs-target="#modal-new-tag">New Tag</a>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-                    <livewire:hmo-groups />
+                    <livewire:tags />
+                    @include('_partials._modals.modal-new-tag')
                 </div>
             </div>
         </div>
+        <div class="col-xl-6 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="card-title m-0 me-2">
+                        <h5 class="m-0 me-2">Vital Reference</h5>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn p-0" type="button" id="employeeList" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="ti ti-dots-vertical ti-sm text-muted"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="employeeList">
+                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
+                                data-bs-target="#modal-new-vital-ref">New Reference</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <livewire:vital-refs />
+                    @include('_partials._modals.modal-new-vital-ref')
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-header d-flex justify-content-between">
+                    <div class="card-title m-0 me-2">
+                        <h5 class="m-0 me-2">Cash Points</h5>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn p-0" type="button" id="employeeList" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="ti ti-dots-vertical ti-sm text-muted"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="employeeList">
+                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
+                                data-bs-target="#modal-new-cash-point">New Cash Point</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <livewire:cashpoints />
+                    @include('_partials._modals.modal-new-cash-point')
+                </div>
+            </div>
+        </div>
+        @if ($system->insurance_providers)
+            <!-- Sales By Country -->
+            <div class="col-xl-12 col-md-12 mb-4">
+                <div class="card h-100">
+                    <div class="card-header d-flex justify-content-between">
+                        <div class="card-title mb-0">
+                            <h5 class="m-0 me-2">HMO Groups</h5>
+                            {{-- <small class="text-muted">Monthly Sales Overview</small> --}}
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn p-0" type="button" id="salesByCountry" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="ti ti-dots-vertical ti-sm text-muted"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="salesByCountry">
+                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
+                                    data-bs-target="#newHmoGroup">New Hmo Group</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <livewire:hmo-groups />
+                    </div>
+                </div>
+            </div>
+            <!--/ Sales By Country -->
+            <div class="col-xl-12 col-md-12 mb-4">
+                <div class="card h-100">
+                    <div class="card-header d-flex justify-content-between">
+                        <div class="card-title mb-0">
+                            <h5 class="m-0 me-2">HMO Plans</h5>
+                            {{-- <small class="text-muted">Monthly Sales Overview</small> --}}
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn p-0" type="button" id="salesByCountry" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="ti ti-dots-vertical ti-sm text-muted"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="salesByCountry">
+                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
+                                    data-bs-target="#newHmoGroup">New Hmo Group</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <livewire:hmo-groups />
+                    </div>
+                </div>
+            </div>
+        @endif
         <!--/ Sales By Country -->
         <div class="col-xl-12 col-md-12 mb-4">
             <div class="card h-100">
@@ -237,7 +383,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 col-xl-4 mb-4">
+        {{-- <div class="col-md-6 col-xl-4 mb-4">
             <div class="card h-100">
                 <div class="card-body">
                     <h4 class="mb-2 pb-1">Consumables</h4>
@@ -246,8 +392,8 @@
                         class="btn btn-primary w-100 waves-effect waves-light">Open</a>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 col-xl-4 mb-4">
+        </div> --}}
+        {{-- <div class="col-md-6 col-xl-4 mb-4">
             <div class="card h-100">
                 <div class="card-body">
                     <h4 class="mb-2 pb-1">Dialysis</h4>
@@ -256,7 +402,7 @@
                         class="btn btn-primary w-100 waves-effect waves-light">Open</a>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="col-md-6 col-xl-4 mb-4">
             <div class="card h-100">
                 <div class="card-body">

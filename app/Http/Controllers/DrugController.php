@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 
 class DrugController extends Controller
 {
-  
-  
+
+
   public function storeDrugs(Request $request)
   {
     $drug = Drug::create($request->all());
@@ -30,5 +30,13 @@ class DrugController extends Controller
 
   public function UpdateCategory()
   {
+  }
+
+  public function getDrugsbyStore(Request $request)
+  {
+    // dd($request->all());
+    $drugs = Drug::where('store_id', $request->input('store'))->get();
+
+    return response()->json($drugs);
   }
 }

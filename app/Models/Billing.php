@@ -7,5 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Billing extends Model
 {
-    use HasFactory;
+  use HasFactory;
+
+  protected $fillable = [
+    'service',
+    'service_id',
+    'user_id',
+    'quantity',
+    'amount',
+    'payer_id',
+    'status',
+  ];
 }

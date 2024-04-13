@@ -24,4 +24,9 @@ class Laboratory extends Model
   {
     return $this->hasOne(LabTemplate::class, 'template_id');
   }
+
+  public static function getServiceType()
+  {
+    return 'laboratory';
+  }
 }

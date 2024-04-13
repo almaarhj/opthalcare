@@ -19,7 +19,8 @@
                                         Profile</a>
                                     <a class="dropdown-item" href="{{ route('app.patients.edit', $patient->id) }}">Edit
                                         Profile</a>
-                                    <a class="dropdown-item" href="javascript:void(0);">Check In</a>
+                                    <a class="dropdown-item"
+                                        href="{{ route('app.patient.checkIn', $patient->id) }}">Check In</a>
                                     <a class="dropdown-item" data-bs-toggle="modal"
                                         data-bs-target="#schedule-appointment{{ $patient->id }}">Schedule
                                         Appointment</a>

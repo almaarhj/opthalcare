@@ -14,8 +14,13 @@ return new class extends Migration
     Schema::create('vision_acuities', function (Blueprint $table) {
       $table->id();
       $table->integer('patient_id');
-      $table->string('left_os');
-      $table->string('right_od');
+      $table->string('right');
+      $table->string('left');
+      $table->string('right_pinhole');
+      $table->string('left_pinhole');
+      $table->string('right_glasses');
+      $table->string('left_glasses');
+      $table->string('disablities');
       $table->timestamps();
     });
   }

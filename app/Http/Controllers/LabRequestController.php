@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Laboratory;
 use App\Models\LabRequest;
 use Illuminate\Http\Request;
+use App\Services\ServiceRequestHandler;
 
 class LabRequestController extends Controller
 {
@@ -29,7 +31,9 @@ class LabRequestController extends Controller
   public function store(Request $request)
   {
     $labrequest = LabRequest::create(array_merge($request->except('status'), ['status' => 'Pending']));
-    // dd($request->all());
+    $lab = Laboratory::find($request->test_id);
+    $serviceHandler = new ServiceRequestHandler();
+    $billingRecord = $serviceHandler->handleServiceRequest($lab->name, $request->patient_id, 'Laboratory');
     return redirect()->back()->with('success', 'Lab Test Requested!');
   }
 
@@ -39,6 +43,13 @@ class LabRequestController extends Controller
   public function show(LabRequest $labRequest)
   {
     //
+  }
+
+  public function specimen($labRequest)
+  {
+    $lab = LabRequest::find($labRequest);
+    $lab->update(['status' => 'Specimen Collected']);
+    dd($lab);
   }
 
   /**

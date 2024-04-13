@@ -36,11 +36,10 @@ class Allergies extends Base
   }
     public function render()
     {
-    $drawUrl = route('app.patient.draw', $this->patientId);
       $allergies = Allergy::query()
       ->orderBy($this->sortBy, $this->sortDirection)
       ->paginate($this->perPage);
         return view('livewire.allergies',
-         ['allergies' => $allergies, 'drawUrl' => $drawUrl]);
+         ['allergies' => $allergies]);
     }
 }
