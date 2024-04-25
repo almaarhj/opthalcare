@@ -91,3 +91,4 @@
     </div>
 </div>
 @include('_partials._modals.modal-new-lab-test')
+@include('_partials._modals.modal-import-lab-test')

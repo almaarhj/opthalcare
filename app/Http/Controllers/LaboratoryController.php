@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LabCategory;
 use App\Models\Laboratory;
+use App\Models\LabCategory;
 use App\Models\LabTemplate;
 use Illuminate\Http\Request;
+use App\Exports\LabTestExport;
+use App\Imports\LabTestImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LaboratoryController extends Controller
 {
@@ -34,6 +37,16 @@ class LaboratoryController extends Controller
   {
     $template = LabTemplate::create($request->all());
     return redirect()->route('app.settings.laboratory')->with('success', 'Lab Test Template Added !');
+  }
+
+  public function Export()
+  {
+    return Excel::download(new LabTestExport, 'Lab_Tests.xlsx');
+  }
+
+  public function Import(Request $request)
+  {
+    Excel::import(new LabTestImport, $request->file('csv')->store('files'));
   }
 
   public function updateTemplate()

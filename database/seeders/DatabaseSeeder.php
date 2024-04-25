@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
 
     $this->call(UsersSeeder::class);
     $this->call(RolesAndPermissionsSeeder::class);
+    $this->call(PatientSeeder::class);
 
     $religions = ['Islam', 'Christianity', 'Others'];
 

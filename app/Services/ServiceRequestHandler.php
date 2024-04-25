@@ -70,11 +70,10 @@ class ServiceRequestHandler
     return $service->price;
   }
   public function isBilled($serviceId, $serviceName)
-    {
-      $billings = Billing::where('service_id', $serviceId)
-                           ->where('service', $serviceName)
-                           ->get();
-      return $billings->status;
-
-    }
+  {
+    $billings = Billing::where('service_id', $serviceId)
+      ->where('service', $serviceName)
+      ->first();
+    return $billings->status;
+  }
 }

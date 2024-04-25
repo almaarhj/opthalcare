@@ -28,8 +28,8 @@
 @section('content')
 
     <div class="row">
-
-
+        <h2>Welcome to Opthal Care</h2>
+        <img src="{{ asset('hhh.png') }}" alt="" style="width:83%; margin:2em;">
     </div>
 
 @endsection

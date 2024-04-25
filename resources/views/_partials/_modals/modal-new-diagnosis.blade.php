@@ -32,7 +32,7 @@
                     <div class="col-12 col-md-12">
                         <label class="form-label">Comments</label>
                         <textarea name="comments" id="editor" class="form-control" rows="5" placeholder="Type Comments here..."></textarea>
-                        <iframe id="drawing" class="col-md-12"
+                        <iframe id="drawing" class="col-md-12" style="height: 1000px;"
                             src="{{ route('app.patient.draw', request()->route()->patient->id) }}">Your
                             browser isn't
                             compatible</iframe>

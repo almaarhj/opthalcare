@@ -26,7 +26,7 @@
             Eraser</a>
     </div>
     <br />
-    <canvas id="colors_sketch" width="500" height="200">
+    <canvas id="colors_sketch" width="500" height="200" style="width: 550px;height: 500px;border-radius: 7px;">
     </canvas>
     <br />
     <br />

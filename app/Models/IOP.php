@@ -5,22 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Billing extends Model
+class IOP extends Model
 {
   use HasFactory;
 
   protected $fillable = [
-    'service',
-    'service_id',
-    'user_id',
-    'quantity',
-    'amount',
-    'payer_id',
-    'status',
+    'patient_id',
+    'right',
+    'left',
   ];
 
   public function patient()
   {
-    return $this->belongsTo(Patient::class, 'user_id');
+    return $this->belongsTo(Patient::class);
   }
 }

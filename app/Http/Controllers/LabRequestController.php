@@ -48,8 +48,19 @@ class LabRequestController extends Controller
   public function specimen($labRequest)
   {
     $lab = LabRequest::find($labRequest);
-    $lab->update(['status' => 'Specimen Collected']);
-    dd($lab);
+    // $lab->update(['status' => 'Specimen Collected']);
+    // dd($lab);
+    $serviceHandler = new ServiceRequestHandler();
+    $service = "Laboratory:" . $lab->test->name;
+    $paid = $serviceHandler->isBilled($lab->id, $service);
+
+    if ($paid) {
+      return "Paid";
+      //$lab->update(['status' => 'Specimen Collected']);
+    } else {
+      // dd("Service Has Not Been Paid");
+      return redirect()->back()->with('error', 'Service Has Not Been Paid For Yet');
+    }
   }
 
   /**

@@ -35,6 +35,10 @@ class Patient extends Model
     return $this->belongsTo(User::class);
   }
 
+  public function nextOfKin()
+  {
+    return $this->hasOne(NextOfKin::class);
+  }
 
   public function getAge()
   {
@@ -46,15 +50,13 @@ class Patient extends Model
     return $this->belongsTo(Religion::class);
   }
 
-  // public function hmo()
-  // {
-  //   return $this->belongsTo(Hmo::class);
-  // }
+  public function hmo()
+  {
+    return $this->hasOne(HmoGroup::class, 'id');
+  }
 
   public function state()
   {
     return $this->belongsTo(State::class);
   }
-
-  
 }

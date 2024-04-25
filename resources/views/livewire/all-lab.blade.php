@@ -43,14 +43,21 @@
                                  <i class="fa fa-ellipsis-v"></i>
                              </button>
                              <ul class="dropdown-menu" style="">
-                                 <li><a href="{{ route('app.lab.specimen', $labRequest->id) }}" class="dropdown-item"
-                                         href="javascript:void(0);">Receive Specimens</a></li>
-                                 <li>
-                                     <hr class="dropdown-divider">
+                                 @if (\App\Models\LabRequest::where('id', $labRequest->id)->first()->status == 'Specimen Collected')
+                                     <li><a class="dropdown-item" data-bs-toggle="modal"
+                                             data-bs-target="#new-add-lab-result">Add Result</a></li>
+                                     <li>
+                                     @else
+                                     <li><a href="{{ route('app.lab.specimen', $labRequest->id) }}"
+                                             class="dropdown-item" href="javascript:void(0);">Receive Specimens</a></li>
+                                     <li>
+                                 @endif
+                                 <hr class="dropdown-divider">
                                  </li>
                                  <l><a class="dropdown-item text-bg-danger" href="javascript:void(0);">Cancel</a></l>
                              </ul>
                          </div>
+                         @include('_partials._modals.modal-add-lab-result')
                          {{-- <div class="dropdown">
                              <button type="button" class="btn btn-sm btn-icon btn-light" data-toggle="dropdown"
                                  data-boundary="viewport" aria-expanded="false" aria-haspopup="true">

@@ -47,10 +47,9 @@
                     <div class="btn-group" role="group" aria-label="Basic example">
                         <a class="btn btn-label-dark waves-effect" href="javascript:void(0);" data-bs-toggle="modal"
                             data-bs-target="#new-lab-test-modal">New</a>
+                        <a class="btn btn-label-dark waves-effect" href="{{ route('app.lab.export') }}">Downlaod List</a>
                         <a class="btn btn-label-dark waves-effect" href="javascript:void(0);" data-bs-toggle="modal"
-                            data-bs-target="#new-speciality-modal">Downlaod List</a>
-                        <a class="btn btn-label-dark waves-effect" href="javascript:void(0);" data-bs-toggle="modal"
-                            data-bs-target="#new-speciality-modal">Import Tests</a>
+                            data-bs-target="#import-lab-test-modal">Import Tests</a>
                     </div>
                 </div>
                 <div class="card-body">

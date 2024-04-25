@@ -118,7 +118,7 @@ class PatientController extends Controller
     $user->assignRole('patient');
     $hospital_no = UniqueIdGenerator::generate(['table' => 'patients', 'length' => 4,]);
     $patient = Patient::create(array_merge($request->except(['password', 'next_of_kin_name', 'next_of_kin_relation', 'next_of_kin_phone', 'next_of_kin_address']), ['hospital_no' => $hospital_no, 'user_id' => $user->id]));
-    $next_of_kin = NextOfKin::create(array_merge($request->only(['next_of_kin_name', 'next_of_kin_relation', 'next_of_kin_phone', 'next_of_kin_address']), ['user_id' => $user->id]));
+    $next_of_kin = NextOfKin::create(array_merge($request->only(['next_of_kin_name', 'next_of_kin_relation', 'next_of_kin_phone', 'next_of_kin_address']), ['patient_id' => $patient->id]));
     $service = Speciality::where('name', 'Enrollment Fee')->first();
     $serviceHandler = new ServiceRequestHandler();
     $billingRecord = $serviceHandler->handleServiceRequest('Enrollment Fee', $patient->id, 'Consultation');

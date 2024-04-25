@@ -150,6 +150,13 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
+                            data-bs-target="#navs-pills-justified-iop" aria-controls="navs-pills-justified-iop"
+                            aria-selected="false" tabindex="-1">
+                            <i class="tf-icons ti ti-eye ti-xs me-1"></i> IOP
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
                             data-bs-target="#navs-pills-justified-allergies"
                             aria-controls="navs-pills-justified-allergies" aria-selected="false" tabindex="-1">
                             <i class="tf-icons ti ti-medical-cross ti-xs me-1"></i> Allergies
@@ -275,6 +282,17 @@
                         </div>
                         @include('_partials._modals.modal-new-va')
                     </div>
+                    <div class="tab-pane fade" id="navs-pills-justified-iop" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="" data-bs-toggle="modal" data-bs-target="#new-i-o-p-modal"
+                                    class="btn btn-primary mb-2 float-end">New Entry</a>
+                            </div>
+                            <livewire:i-o-p :patientId="$patient->id" />
+
+                        </div>
+                        @include('_partials._modals.modal-new-i-o-p')
+                    </div>
                     <div class="tab-pane fade" id="navs-pills-justified-allergies" role="tabpanel">
                         <a href="" data-bs-toggle="modal" data-bs-target="#new-allergies-modal"
                             class="btn btn-primary mb-2 float-end">New Entry</a>
@@ -358,43 +376,7 @@
                         @include('_partials._modals.modal-new-documents')
                     </div>
                     <div class="tab-pane fade" id="navs-pills-justified-bills" role="tabpanel">
-                        <table class="table">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>
-                                        <div class="thead-dd dropdown">
-                                            <div
-                                                class="custom-control custom-control-inline custom-control-nolabel custom-checkbox">
-                                                <input title="" type="checkbox" id="bill-select-all"
-                                                    class="custom-control-input"><label class="custom-control-label"
-                                                    for="bill-select-all"></label>
-                                            </div>
-                                            <div class="thead-btn" role="button" data-toggle="dropdown"
-                                                aria-haspopup="true" aria-expanded="false"><span
-                                                    class="fa fa-caret-down"></span></div>
-                                            <div class="dropdown-menu">
-                                                <div class="dropdown-arrow"></div><a class="dropdown-item"
-                                                    href="javascript:" id="item-select-all">Select all</a><a
-                                                    class="dropdown-item" href="javascript:"
-                                                    id="item-unselect-all">Unselect all</a>
-                                                <div class="dropdown-divider"></div><a class="dropdown-item"
-                                                    href="javascript:" id="add-to-invoice-btn">Add to Invoice</a><a
-                                                    class="dropdown-item" href="javascript:" id="mini-receipt-btn">Print
-                                                    mini receipt</a>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <th>Date</th>
-                                    <th>Service</th>
-                                    <th class="text-right">Quantity</th>
-                                    <th class="text-right">Credit</th>
-                                    <th class="text-right">Debit</th>
-                                    <th>Payer</th>
-                                    <th>*</th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
+                        <livewire:billings :patientId="$patient->id" />
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BedController;
+use App\Http\Controllers\IOPController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\DrugController;
 use App\Http\Controllers\RoleController;
@@ -24,8 +25,10 @@ use App\Http\Controllers\HmoGroupController;
 use App\Http\Controllers\PharmacyController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ReligionController;
+use App\Http\Controllers\VitalRefController;
 use App\Http\Controllers\AdmissionController;
 use App\Http\Controllers\AntenatalController;
+use App\Http\Controllers\CashPointController;
 use App\Http\Controllers\ConsumbleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DiagnosisController;
@@ -43,11 +46,9 @@ use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\ConsultingRoomController;
 use App\Http\Controllers\SystemSettingsController;
 use App\Http\Controllers\AppointmentTypeController;
-use App\Http\Controllers\CashPointController;
 use App\Http\Controllers\ServiceCategoryController;
 use App\Http\Controllers\RadiologyRequestController;
 use App\Http\Controllers\ConsultingTemplateController;
-use App\Http\Controllers\VitalRefController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +90,8 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], functi
   Route::resource('appointments', AppointmentController::class);
   Route::resource('pharmacy', PharmacyController::class);
   Route::post('lab-category', [LaboratoryController::class, 'storeCategory'])->name('lab-category.store');
+  Route::get('lab-export', [LaboratoryController::class, 'Export'])->name('lab.export');
+  Route::post('lab-import', [LaboratoryController::class, 'Import'])->name('lab.import');
   Route::post('lab-category/{category}', [LaboratoryController::class, 'updateCategory'])->name('lab-category.update');
   Route::post('lab-template', [LaboratoryController::class, 'storeTemplate'])->name('lab-template.store');
   Route::post('lab-template/{template}', [LaboratoryController::class, 'updateTemplate'])->name('lab-template.update');
@@ -103,7 +106,9 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], functi
   Route::get('lab/specimen/{lab}', [LabRequestController::class, 'specimen'])->name('lab.specimen');
   Route::resource('vitals', VitalsController::class);
   Route::resource('vision-acuity', VisionAcuityController::class);
+  Route::resource('iop', IOPController::class);
   Route::get('vision-acuity/{id}', [VisionAcuityController::class, 'show']);
+  Route::get('iop/{id}', [IOPController::class, 'show']);
   Route::post('lab-category', [LaboratoryController::class, 'storeCategory'])->name('lab-category.store');
 
   Route::post('consumables-add', [ConsumbleController::class, 'storeConsumables'])->name('consumables-add.store');
