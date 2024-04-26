@@ -169,4 +169,4 @@ Route::post('getDrugsCategorybyStore', [DrugController::class, 'getDrugsCategory
 Route::post('getDrugsbyStore', [DrugController::class, 'getDrugsbyStore']);
 
 
-// URL::forceScheme('https');
+URL::forceScheme('https');
