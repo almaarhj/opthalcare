@@ -23,47 +23,65 @@
                         <td class="align-middle text-nowrap">{{ $request->created_at->diffForHumans() }}</td>
                         <td class="align-middle">{{ $request->patient->user->firstname }}</td>
                         <td class="align-middle">
-
                             <span class="badge badge-lg bg-primary mb-1">
-
                                 {{ $request->drug->name }}
-
                             </span>
-
-
                         </td>
                         <td class="align-middle">{{ $request->user->firstname }}</td>
                         <td class="align-middle text-right">
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-sm btn-icon btn-light" data-toggle="dropdown"
-                                    data-boundary="viewport" aria-expanded="false" aria-haspopup="true">
-                                    <i class="fa fa-ellipsis-v"></i> <span class="sr-only">Actions</span></button>
-                                <div class="dropdown-menu dropdown-menu-right">
-
-                                    <a href="/pharmacy/request/996/view?print" class="dropdown-item" target="_blank">
-                                        Print
-                                    </a>
-                                    <button class="dropdown-item" data-remote="/pharmacy/request/996/view"
-                                        data-toggle="modal" data-target="#global-modal" type="button">
-                                        Details
-                                    </button>
-
-
-                                    <button class="dropdown-item" data-toggle="modal"
-                                        data-remote="/pharmacy/request/996/fill" data-target="#global-modal-lg"
-                                        type="button">
-                                        Fill
-                                    </button>
-
-                                    <button class="dropdown-item" data-toggle="question"
-                                        data-question="Cancel All Prescription Lines in this Request?"
-                                        data-remote="/pharmacy/request/996/cancel" type="button">
-                                        Cancel
-                                    </button>
-
-
-                                </div>
+                            <div class="d-inline-block"><a href="javascript:;" class="dropdown hide-arrow"
+                                    data-bs-toggle="dropdown"><i class="text-primary ti ti-dots-vertical"></i></a>
+                                <ul class="dropdown-menu dropdown-menu-end m-0">
+                                    <li> <a href="pharmacy/request/{{ $request->id }}" class="dropdown-item"
+                                            target="_blank">
+                                            Print
+                                        </a></li>
+                                    <li> <button class="dropdown-item"
+                                            data-request-url="{{ route('app.pharmacy.show', $request->id) }}"
+                                            data-toggle="modal" data-target="#global-modal" type="button">
+                                            Details
+                                        </button></li>
+                                    <li> <button class="dropdown-item" data-toggle="modal"
+                                            data-request-url="{{ route('app.pharmacy.edit', $request->id) }}"
+                                            data-target="#global-modal-lg" type="button">
+                                            Fill
+                                        </button></li>
+                                    <div class="dropdown-divider"></div>
+                                    <li>
+                                        <button class="dropdown-item" data-toggle="question"
+                                            data-question="Cancel All Prescription Lines in this Request?"
+                                            data-remote="/pharmacy/request/996/cancel" type="button">
+                                            Cancel
+                                        </button>
+                                    </li>
+                                </ul>
                             </div>
+                            <script>
+                                document.querySelector('#dele{{ $request->id }}').addEventListener('click', function(e) {
+                                    // alert(this.getAttribute('data-value'));
+                                    Swal.fire({
+                                        title: 'Are you sure?',
+                                        text: "You won't be able to revert this!",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonText: 'Yes, delete it!',
+                                        customClass: {
+                                            confirmButton: 'btn btn-primary me-3',
+                                            cancelButton: 'btn btn-label-secondary'
+                                        },
+                                        buttonsStyling: false
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            document.getElementById('dele#' + this.getAttribute('data-value')).submit();
+                                        }
+                                    })
+                                })
+                            </script>
+                            <form id="dele#{{ $request->id }}" action="" method="POST"
+                                style="display: inline-block;">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            </form>
                         </td>
                     </tr>
                 @endforeach
@@ -81,3 +99,25 @@
 
     </div><!-- /.table-responsive -->
 </div>
+@include('_partials._modals.global-modal')
+<script>
+    $(document).ready(function() {
+        $('.dropdown-item').on('click', function() {
+            var requestUrl = $(this).data('request-url');
+
+            $.ajax({
+                url: requestUrl,
+                type: 'GET',
+                success: function(response) {
+                    // Assuming the response contains the HTML for the modal content
+                    $('#global-modal .modal-body').html(response);
+                    $('#global-modal').modal('show');
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors
+                    console.error(error);
+                }
+            });
+        });
+    });
+</script>

@@ -16,6 +16,8 @@ return new class extends Migration
       $table->integer('patient_id');
       $table->integer('drug_id');
       $table->integer('user_id');
+      $table->string('dose')->nullable();
+      $table->string('collected_by')->nullable();
       $table->string('status');
       $table->timestamps();
     });

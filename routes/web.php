@@ -89,6 +89,7 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], functi
   Route::resource('messages', MessageController::class);
   Route::resource('appointments', AppointmentController::class);
   Route::resource('pharmacy', PharmacyController::class);
+  Route::get('pharmacy/request/{id}', [PharmacyController::class, 'print'])->name('pharmacy.request.print');
   Route::post('lab-category', [LaboratoryController::class, 'storeCategory'])->name('lab-category.store');
   Route::get('lab-export', [LaboratoryController::class, 'Export'])->name('lab.export');
   Route::post('lab-import', [LaboratoryController::class, 'Import'])->name('lab.import');
@@ -168,4 +169,4 @@ Route::post('getDrugsCategorybyStore', [DrugController::class, 'getDrugsCategory
 Route::post('getDrugsbyStore', [DrugController::class, 'getDrugsbyStore']);
 
 
-URL::forceScheme('https');
+// URL::forceScheme('https');

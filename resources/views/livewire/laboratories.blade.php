@@ -92,3 +92,69 @@
 </div>
 @include('_partials._modals.modal-new-lab-test')
 @include('_partials._modals.modal-import-lab-test')
+<script>
+    form.addEventListener("submit", e => {
+        e.preventDefault();
+
+        // save the file from the input file
+        const file = e.target[1].files[
+            0]; // getting the first input of the form then the first file of its files property (array)
+
+        //parse the file with Papa.parse
+        Papa.parse(file, {
+            header: true,
+            complete: function(results) {
+                // read the data from results
+                const {
+                    data
+                } = results;
+
+                // Get CSRF token from meta tag
+                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute(
+                    'content');
+
+                // Send each element to Laravel route for saving
+                data.forEach((element, index) => {
+                    const progressBarId = `progressBar${index}`;
+                    const progressBarHTML = `
+                        <div class="progress mt-3" style="height: 30px;">
+                            <div id="${progressBarId}" class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                        </div>
+                    `;
+                    progressBarsContainer.innerHTML += progressBarHTML;
+
+                    const fetchPromise = fetch('students/import', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': csrfToken,
+                            },
+                            body: JSON.stringify(element),
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok.');
+                            }
+                            // Update progress bar when element is processed successfully
+                            const progressBar = document.getElementById(progressBarId);
+                            progressBar.style.width = '100%';
+                            progressBar.innerText = '100%';
+                            progressBar.classList.remove('progress-bar-striped',
+                                'bg-info');
+                            progressBar.classList.add('bg-success');
+                            return response.json();
+                        })
+                        .catch(error => {
+                            console.error(
+                                'There was a problem with your fetch operation:',
+                                error);
+                            // Handle error response if needed
+                            return Promise.reject(error);
+                        });
+
+                });
+            }
+        });
+        form.reset();
+    });
+</script>

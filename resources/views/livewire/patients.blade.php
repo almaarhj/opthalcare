@@ -32,7 +32,8 @@
                         <figcaption class="figure-caption">
                             <h6 class="figure-title" style="white-space: normal;"><a
                                     href="">{{ $patient->user->firstname . ' ' . $patient->user->middlename . ' ' . $patient->user->lastname }}
-                                    [HRN{{ sprintf('%06d', $patient->hospital_no) }}]</a></h6>
+                                    [{{ app(App\Settings\SystemSettings::class)->number_prefix ?: 'HRN' }}{{ $patient->hospital_no }}]</a>
+                            </h6>
                             <p class="text-muted mb-0">{{ $patient->gender }}, {{ $patient->getAge() }}</p>
                             <p class="text-muted mb-0">{{ $patient->user->phone }}</p>
                             <p class="text-muted mb-0"><span class="badge badge-dark" data-toggle="tooltip"

@@ -21,6 +21,7 @@
 @section('page-script')
     <script src="{{ asset('assets/js/cards-advance.js') }}"></script>
     {{-- <script src="{{asset('assets/js/modal-edit-user.js')}}"></script> --}}
+    <script src="https://unpkg.com/papaparse@latest/papaparse.min.js"></script>
 @endsection
 
 @section('content')
