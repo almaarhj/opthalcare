@@ -72,7 +72,7 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], functi
   Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
   Route::resource('users', UserController::class);
   Route::resource('diagnosis', DiagnosisController::class);
-  Route::get('diagnosis/{id}', [DiagnosisController::class, 'show']);
+  Route::get('diagnosis/{id}', [DiagnosisController::class, 'show'])->name('show.diagnosis');
   Route::resource('roles', RoleController::class);
   Route::resource('patients', PatientController::class);
   Route::get('patient/draw/{id}', [PatientController::class, 'draw'])->name('patient.draw');
@@ -108,8 +108,8 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], functi
   Route::resource('vitals', VitalsController::class);
   Route::resource('vision-acuity', VisionAcuityController::class);
   Route::resource('iop', IOPController::class);
-  Route::get('vision-acuity/{id}', [VisionAcuityController::class, 'show']);
-  Route::get('iop/{id}', [IOPController::class, 'show']);
+  Route::get('vision-acuity/{id}', [VisionAcuityController::class, 'show'])->name('show.va');
+  Route::get('iop/{id}', [IOPController::class, 'show'])->name('show.iop');
   Route::post('lab-category', [LaboratoryController::class, 'storeCategory'])->name('lab-category.store');
 
   Route::post('consumables-add', [ConsumbleController::class, 'storeConsumables'])->name('consumables-add.store');
@@ -169,4 +169,4 @@ Route::post('getDrugsCategorybyStore', [DrugController::class, 'getDrugsCategory
 Route::post('getDrugsbyStore', [DrugController::class, 'getDrugsbyStore']);
 
 
-URL::forceScheme('https');
+// URL::forceScheme('https');

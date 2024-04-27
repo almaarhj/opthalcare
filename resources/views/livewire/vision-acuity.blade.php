@@ -21,8 +21,9 @@
                                     <i class="fa fa-ellipsis-v"></i>
                                 </button>
                                 <ul class="dropdown-menu" style="">
-                                    <li><a class="dropdown-item" href="javascript:void(0);"
-                                            onclick="showVaDetails({{ $va->id }})">Details </a></li>
+                                    <li><button class="dropdown-item"
+                                            data-request-url="{{ route('app.show.va', $va->id) }}" data-toggle="modal"
+                                            data-target="#global-modal">Details </button></li>
                                     <li>
                                     <li><a class="dropdown-item" href="javascript:void(0);">Edit </a></li>
                                     <li>
@@ -39,21 +40,3 @@
         </table>
     </div>
 </div>
-@include('_partials/_modals.va-details')
-<script>
-    function showVaDetails(vaId) {
-        $.ajax({
-            url: '/app/vision-acuity/' + vaId, // Replace with the actual endpoint URL
-            type: 'GET',
-            success: function(response) {
-                // Populate modal with response data
-                $('#va-details-modal .modal-body').html(response);
-                $('#va-details-modal').modal('show');
-            },
-            error: function(xhr, status, error) {
-                // Handle errors
-                console.error(xhr.responseText);
-            }
-        });
-    }
-</script>

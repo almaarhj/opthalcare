@@ -384,3 +384,25 @@
         </div>
     </div>
 @endsection
+@include('_partials._modals.global-modal')
+<script>
+    $(document).ready(function() {
+        $('.dropdown-item').on('click', function() {
+            var requestUrl = $(this).data('request-url');
+
+            $.ajax({
+                url: requestUrl,
+                type: 'GET',
+                success: function(response) {
+                    // Assuming the response contains the HTML for the modal content
+                    $('#global-modal .modal-body').html(response);
+                    $('#global-modal').modal('show');
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors
+                    console.error(error);
+                }
+            });
+        });
+    });
+</script>

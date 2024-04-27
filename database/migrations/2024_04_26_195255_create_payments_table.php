@@ -11,13 +11,12 @@ return new class extends Migration
    */
   public function up(): void
   {
-    Schema::create('next_of_kin', function (Blueprint $table) {
+    Schema::create('payments', function (Blueprint $table) {
       $table->id();
-      $table->integer('patient_id')->nullable();
-      $table->string('next_of_kin_name')->nullable();
-      $table->string('next_of_kin_relation')->nullable();
-      $table->string('next_of_kin_phone')->nullable();
-      $table->longText('next_of_kin_address')->nullable();
+      $table->integer('billing_id');
+      $table->integer('cashpoint_id')->nullable();
+      $table->string('payment_method')->nullable();
+      $table->integer('paying_amount');
       $table->timestamps();
     });
   }
@@ -27,6 +26,6 @@ return new class extends Migration
    */
   public function down(): void
   {
-    Schema::dropIfExists('next_of_kin');
+    Schema::dropIfExists('payments');
   }
 };

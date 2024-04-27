@@ -9,19 +9,21 @@
         [{{ app(App\Settings\SystemSettings::class)->number_prefix ?: 'HRN' }}{{ $request->patient->hospital_no }}]
     </div>
 </div>
-<form action="{{ route('app.procedure.store') }}" method="POST" class="row g-3">
+<form action="{{ route('app.pharmacy.update', $request->id) }}" method="POST" class="row g-3">
     @csrf
+    @method('PUT')
     <div class="col-4 col-md-4">
         <label class="form-label"> Name</label>
-        <input type="text" name="name" value="{{ $request->drug->name }}" class="form-control" />
+        <input type="text" name="name" readonly disabled value="{{ $request->drug->name }}"
+            class="form-control" />
     </div>
     <div class="col-4 col-md-4">
-        <label class="form-label"> Procedure Cost</label>
-        <input type="text" name="procedure_cost" class="form-control" placeholder="Procedure Cost" />
+        <label class="form-label"> Dose</label>
+        <input type="text" name="dose" value="{{ $request->dose }}" class="form-control" />
     </div>
     <div class="col-4 col-md-4">
-        <label class="form-label"> Theatre Cost</label>
-        <input type="text" name="theatre_cost" class="form-control" placeholder="Theatre Cost" />
+        <label class="form-label"> Collected By</label>
+        <input type="text" name="collecte_by" class="form-control" placeholder="Collected By" />
     </div>
     <div class="col-12 text-center">
         <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>

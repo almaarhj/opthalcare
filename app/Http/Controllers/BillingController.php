@@ -28,7 +28,6 @@ class BillingController extends Controller
    */
   public function store(Request $request)
   {
-    //
   }
 
   /**
@@ -36,7 +35,7 @@ class BillingController extends Controller
    */
   public function show(Billing $billing)
   {
-    //
+    return view('billing.show', compact('billing'));
   }
 
   /**

@@ -36,24 +36,33 @@ class PharmacyController extends Controller
   {
 
     $request = DrugRequest::find($id);
-    $serviceHandler = new ServiceRequestHandler();
-    $service = "Pharmacy:" . $request->drug->name;
-    $paid = $serviceHandler->isBilled($request->id, $service);
-
-    if ($paid) {
-      return "Paid";
-      //$lab->update(['status' => 'Specimen Collected']);
-      // return view('pharmacy.fill', compact('request'));
-    } else {
-      // dd("Service Has Not Been Paid");
-      return redirect()->back()->with('error', 'Service Has Not Been Paid For Yet');
-    }
     // dd($request);
+    return view('pharmacy.fill', compact('request'));
   }
 
   public function print($id)
   {
     $request = DrugRequest::find($id);
     return view('pharmacy.print', compact('request'));
+  }
+
+
+  public function update(Request $request, $id)
+  {
+    $pharmacy = DrugRequest::find($id);
+    // dd($pharmacy);
+    $serviceHandler = new ServiceRequestHandler();
+    $service = "Pharmacy:" . $pharmacy->drug->name;
+    $paid = $serviceHandler->isBilled($pharmacy->drug->id, $service);
+
+    if ($paid) {
+      $pharmacy->update(['collected_by' => $request->collected_by, 'status' => 'Filled']);
+      return redirect()->back()->with('success', 'Drugs Filled');
+    } else {
+      // dd("Service Has Not Been Paid");
+      return redirect()->back()->with('error', 'Service Has Not Been Paid For Yet');
+    }
+
+    // return view('pharmacy.fill', compact('request'));
   }
 }

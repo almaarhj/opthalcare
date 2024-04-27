@@ -33,8 +33,9 @@
                                     <i class="fa fa-ellipsis-v"></i>
                                 </button>
                                 <ul class="dropdown-menu" style="">
-                                    <li><a class="dropdown-item" href="javascript:void(0);"
-                                            onclick="showDiagnosisDetails({{ $diagnosis->id }})">Details </a></li>
+                                    <li><a class="dropdown-item"
+                                            data-request-url="{{ route('app.show.diagnosis', $diagnosis->id) }}"
+                                            data-toggle="modal" data-target="#global-modal">Details </a></li>
                                     <li><a class="dropdown-item" href="javascript:void(0);">Edit </a></li>
                                     <li>
                                         <hr class="dropdown-divider">
@@ -51,21 +52,25 @@
 
 </div>
 @include('_partials._modals.modal-new-diagnosis')
-@include('_partials/_modals.diagnosis-details')
+@include('_partials._modals.global-modal')
 <script>
-    function showDiagnosisDetails(Id) {
-        $.ajax({
-            url: '/app/diagnosis/' + Id, // Replace with the actual endpoint URL
-            type: 'GET',
-            success: function(response) {
-                // Populate modal with response data
-                $('#diagnosis-details-modal .modal-body').html(response);
-                $('#diagnosis-details-modal').modal('show');
-            },
-            error: function(xhr, status, error) {
-                // Handle errors
-                console.error(xhr.responseText);
-            }
+    $(document).ready(function() {
+        $('.dropdown-item').on('click', function() {
+            var requestUrl = $(this).data('request-url');
+
+            $.ajax({
+                url: requestUrl,
+                type: 'GET',
+                success: function(response) {
+                    // Assuming the response contains the HTML for the modal content
+                    $('#global-modal .modal-body').html(response);
+                    $('#global-modal').modal('show');
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors
+                    console.error(error);
+                }
+            });
         });
-    }
+    });
 </script>

@@ -179,8 +179,8 @@
                             <div class="col-md-12">
                                 <label for="residential_address" class="form-label">Residential Address <span
                                         class="text-danger">*</span></label>
-                                <textarea name="residential_address" id="residential_address" cols="30" rows="10"
-                                    class="form-control @error('residential_address') is-invalid @enderror"></textarea>
+                                <input name="residential_address" id="residential_address"
+                                    class="form-control @error('residential_address') is-invalid @enderror">
                                 @if ($errors->has('residential_address'))
                                     <div class="text-danger">
                                         {{ $errors->first('residential_address') }}
@@ -253,8 +253,8 @@
                             <div class="col-md-12">
                                 <label for="nok_address" class="form-label">Next of Kin's Address <span
                                         class="text-danger">*</span></label>
-                                <textarea name="next_of_kin_address" id="" cols="30" rows="10"
-                                    class="form-control @error('next_of_kin_address') is-invalid @enderror"></textarea>
+                                <input name="next_of_kin_address" id=""
+                                    class="form-control @error('next_of_kin_address') is-invalid @enderror">
                                 @if ($errors->has('next_of_kin_address'))
                                     <div class="text-danger">
                                         {{ $errors->first('next_of_kin_address') }}

@@ -32,8 +32,10 @@
                                 <i class="fa fa-ellipsis-v"></i>
                             </button>
                             <ul class="dropdown-menu" style="">
-                                <li><a href="" class="dropdown-item" href="javascript:void(0);">Receive
-                                        Payment</a></li>
+                                <li><button class="dropdown-item"
+                                        data-request-url="{{ route('app.billing.show', $billing->id) }}"
+                                        data-toggle="modal" data-target="#global-modal">Receive
+                                        Payment</button></li>
                                 {{-- <li>
                               <hr class="dropdown-divider">
                           </li>
@@ -46,3 +48,25 @@
         </tbody>
     </table>
 </div>
+@include('_partials._modals.global-modal')
+<script>
+    $(document).ready(function() {
+        $('.dropdown-item').on('click', function() {
+            var requestUrl = $(this).data('request-url');
+
+            $.ajax({
+                url: requestUrl,
+                type: 'GET',
+                success: function(response) {
+                    // Assuming the response contains the HTML for the modal content
+                    $('#global-modal .modal-body').html(response);
+                    $('#global-modal').modal('show');
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors
+                    console.error(error);
+                }
+            });
+        });
+    });
+</script>

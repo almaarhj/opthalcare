@@ -38,6 +38,11 @@
                         </select>
 
                     </div>
+                    <div class="col-12 col-md-12">
+                        <label class="form-label" for="category_id">Dose</label>
+                        <input type="text" name="dose" class="form-control" placeholder="Dose">
+                    </div>
+
                     <div class="col-12 text-center">
                         <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button>
                         <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
