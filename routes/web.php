@@ -38,6 +38,7 @@ use App\Http\Controllers\RadiologyController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\LaboratoryController;
 use App\Http\Controllers\LabRequestController;
+use App\Http\Controllers\RefractionController;
 use App\Http\Controllers\SpecialityController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\WaitingListController;
@@ -163,10 +164,11 @@ Route::group(['prefix' => 'app', 'as' => 'app.', 'middleware' => 'auth'], functi
   Route::resource('allergies', AllergyController::class);
   Route::resource('vitalRefs', VitalRefController::class);
   Route::resource('cashpoints', CashPointController::class);
+  Route::get('refraction/{patient}', [RefractionController::class, 'create'])->name('refraction.create');
 });
 Route::get('getLGA/{state}', [DashboardController::class, 'getLGA']);
 Route::post('getDrugsCategorybyStore', [DrugController::class, 'getDrugsCategorybyStore']);
 Route::post('getDrugsbyStore', [DrugController::class, 'getDrugsbyStore']);
 
 
-// URL::forceScheme('https');
+URL::forceScheme('https');

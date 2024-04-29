@@ -157,6 +157,13 @@
                     </li>
                     <li class="nav-item" role="presentation">
                         <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
+                            data-bs-target="#navs-pills-justified-refraction"
+                            aria-controls="navs-pills-justified-refraction" aria-selected="false" tabindex="-1">
+                            <i class="tf-icons ti ti-search ti-xs me-1"></i> Refraction
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button type="button" class="nav-link" role="tab" data-bs-toggle="tab"
                             data-bs-target="#navs-pills-justified-allergies"
                             aria-controls="navs-pills-justified-allergies" aria-selected="false" tabindex="-1">
                             <i class="tf-icons ti ti-medical-cross ti-xs me-1"></i> Allergies
@@ -293,6 +300,18 @@
                         </div>
                         @include('_partials._modals.modal-new-i-o-p')
                     </div>
+                    <div class="tab-pane fade" id="navs-pills-justified-refraction" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button data-request-url="{{ route('app.refraction.create', $patient->id) }}"
+                                    data-toggle="modal" data-target="#global-modal"
+                                    class="btn btn-primary link mb-2 float-end">New Entry</button>
+                            </div>
+                            {{-- <livewire:i-o-p :patientId="$patient->id" /> --}}
+
+                        </div>
+                        @include('_partials._modals.modal-new-i-o-p')
+                    </div>
                     <div class="tab-pane fade" id="navs-pills-justified-allergies" role="tabpanel">
                         <a href="" data-bs-toggle="modal" data-bs-target="#new-allergies-modal"
                             class="btn btn-primary mb-2 float-end">New Entry</a>
@@ -385,9 +404,32 @@
     </div>
 @endsection
 @include('_partials._modals.global-modal')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function() {
         $('.dropdown-item').on('click', function() {
+            var requestUrl = $(this).data('request-url');
+
+            $.ajax({
+                url: requestUrl,
+                type: 'GET',
+                success: function(response) {
+                    // Assuming the response contains the HTML for the modal content
+                    $('#global-modal .modal-body').html(response);
+                    $('#global-modal').modal('show');
+                },
+                error: function(xhr, status, error) {
+                    // Handle errors
+                    console.error(error);
+                }
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('.link').on('click', function() {
             var requestUrl = $(this).data('request-url');
 
             $.ajax({
