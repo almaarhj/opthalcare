@@ -68,9 +68,10 @@
                                     class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-2">
                                     <li class="list-inline-item d-flex gap-1">
 
-                                        <span class="badge bg-primary">{{ $patient->gender }}</span>
+                                      <span class="badge bg-primary">{{ $patient->gender }}</span>
                                         <span class="badge bg-primary">{{ $patient->getAge() }}</span>
                                         <span class="badge bg-primary">Next Appointment: </span>
+                                      <span class="badge bg-primary">Updated at: {{ $patient->updated_at->diffForHumans() }}</span>
                                     </li>
                                 </ul>
                             </div>

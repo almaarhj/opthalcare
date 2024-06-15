@@ -138,17 +138,23 @@
                                     </div>
                                 @endif
                             </div>
+                          <div class="col-md-12">
+                            <label for="residential_address" class="form-label">Disability<span
+                                class="text-danger">*</span></label>
+                            <input name="disability" id="residential_address"
+                                   class="form-control @error('residential_address') is-invalid @enderror">
+                          </div>
                             <div class="col-md-4">
                                 <label for="" class="form-label">Occupation <span
                                         class="text-danger">*</span></label>
                                 <input type="text" name="occupation" value="{{ old('occupation') }}"
                                     class="form-control @error('occupation') is-invalid @enderror"
                                     placeholder="Occupation">
-                                @if ($errors->has('occupation'))
-                                    <div class="text-danger">
-                                        {{ $errors->first('occupation') }}
-                                    </div>
-                                @endif
+{{--                                @if ($errors->has('occupation'))--}}
+{{--                                    <div class="text-danger">--}}
+{{--                                        {{ $errors->first('occupation') }}--}}
+{{--                                    </div>--}}
+{{--                                @endif--}}
                             </div>
                             <div class="col-md-4">
                                 <label for="state_r" class="form-label">State of Residence<span
@@ -160,58 +166,32 @@
                                         <option value="{{ $state }}">{{ $state }}</option>
                                     @endforeach
                                 </select>
-                                @if ($errors->has('state_of_residence'))
-                                    <div class="text-danger">
-                                        {{ $errors->first('state_of_residence') }}
-                                    </div>
-                                @endif
+{{--                                @if ($errors->has('state_of_residence'))--}}
+{{--                                    <div class="text-danger">--}}
+{{--                                        {{ $errors->first('state_of_residence') }}--}}
+{{--                                    </div>--}}
+{{--                                @endif--}}
                             </div>
                             <div class="col-md-4">
                                 <label for="lga_r" class="form-label">LGA<span class="text-danger">*</span></label>
                                 <select name="lga_of_residence" id="lga_r"
                                     class="form-control @error('lga_of_residence') is-invalid @enderror"></select>
-                                @if ($errors->has('lga_of_residence'))
-                                    <div class="text-danger">
-                                        {{ $errors->first('lga_of_residence') }}
-                                    </div>
-                                @endif
+{{--                                @if ($errors->has('lga_of_residence'))--}}
+{{--                                    <div class="text-danger">--}}
+{{--                                        {{ $errors->first('lga_of_residence') }}--}}
+{{--                                    </div>--}}
+{{--                                @endif--}}
                             </div>
                             <div class="col-md-12">
                                 <label for="residential_address" class="form-label">Residential Address <span
                                         class="text-danger">*</span></label>
                                 <input name="residential_address" id="residential_address"
                                     class="form-control @error('residential_address') is-invalid @enderror">
-                                @if ($errors->has('residential_address'))
-                                    <div class="text-danger">
-                                        {{ $errors->first('residential_address') }}
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="col-md-6">
-                                <label for="state_o" class="form-label">State of Origin<span
-                                        class="text-danger">*</span></label>
-                                <select name="state_of_origin" id="state_o"
-                                    class="form-control @error('state_of_origin') is-invalid @enderror">
-                                    <option value="" selected>Select State...</option>
-                                    @foreach ($states as $state)
-                                        <option value="{{ $state }}">{{ $state }}</option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->has('state_of_origin'))
-                                    <div class="text-danger">
-                                        {{ $errors->first('state_of_origin') }}
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="col-md-6">
-                                <label for="lga_o" class="form-label">LGA<span class="text-danger">*</span></label>
-                                <select name="lga_of_origin" id="lga_o"
-                                    class="form-control @error('state_of_origin') is-invalid @enderror"></select>
-                                @if ($errors->has('lga_of_origin'))
-                                    <div class="text-danger">
-                                        {{ $errors->first('lga_of_origin') }}
-                                    </div>
-                                @endif
+{{--                                @if ($errors->has('residential_address'))--}}
+{{--                                    <div class="text-danger">--}}
+{{--                                        {{ $errors->first('residential_address') }}--}}
+{{--                                    </div>--}}
+{{--                                @endif--}}
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label" for="nok_name">Next of Kin's Name <span

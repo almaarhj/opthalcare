@@ -8,6 +8,7 @@ use Livewire\Component;
 class Patients extends Base
 {
     public $sortBy = 'hospital_no';
+    public $sortDirection = 'desc';
     public function render()
     {
         if ($this->search) {

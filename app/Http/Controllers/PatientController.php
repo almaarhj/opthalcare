@@ -71,12 +71,12 @@ class PatientController extends Controller
       // 'next_of_kin_phone' => 'required|string|max:20',
       // 'next_of_kin_address' => 'required|string|max:255',
       'marital_status' => 'required|string',
-      'occupation' => 'required|string',
-      'state_of_residence' => 'required|string',
-      'lga_of_residence' => 'required|string',
+//      'occupation' => 'required|string',
+//      'state_of_residence' => 'required|string',
+//      'lga_of_residence' => 'required|string',
       // 'state_of_origin' => 'required|string',
       // 'lga_of_origin' => 'required|string',
-      'residential_address' => 'required|string',
+//      'residential_address' => 'required|string',
 
       // Add more validation rules as needed
     ];

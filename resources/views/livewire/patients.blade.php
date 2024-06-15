@@ -5,9 +5,9 @@
                 <div class="card card-figure is-hoverable"><!-- .card-figure -->
                     <figure class="figure"><!-- .figure-img -->
                         <div class="figure-img d-flex justify-content-between" style="overflow: unset">
-                            <div href="javascript:" class="user-avatar user-avatar-xl"><img
+                            <a href="{{ route('app.patients.show', $patient->id) }}" class="user-avatar user-avatar-xl"><img
                                     src="{{ $patient->gender == 'Male' ? asset('assets/img/user-male-circle.png') : asset('assets/img/user-female-circle.png') }}"
-                                    alt=""></div>
+                                    alt=""></a>
                             <div class="dropdown">
                                 <button class="btn p-0" type="button" id="topCourses" data-bs-toggle="dropdown"
                                     aria-haspopup="true" aria-expanded="false">
@@ -31,7 +31,7 @@
                         </div><!-- /.figure-img --><!-- .figure-caption -->
                         <figcaption class="figure-caption">
                             <h6 class="figure-title" style="white-space: normal;"><a
-                                    href="">{{ $patient->user->firstname . ' ' . $patient->user->middlename . ' ' . $patient->user->lastname }}
+                                    href="{{ route('app.patients.show', $patient->id) }}">{{ $patient->user->firstname . ' ' . $patient->user->middlename . ' ' . $patient->user->lastname }}
                                     [{{ app(App\Settings\SystemSettings::class)->number_prefix ?: 'HRN' }}{{ $patient->hospital_no }}]</a>
                             </h6>
                             <p class="text-muted mb-0">{{ $patient->gender }}, {{ $patient->getAge() }}</p>
